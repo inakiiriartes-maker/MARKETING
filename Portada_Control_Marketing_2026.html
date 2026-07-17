@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control de Marketing 2026 — Provalliance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F5F3EE;--bg2:#EDEAE3;--bg3:#E4E0D6;--white:#FFFFFF;--text:#1A1A18;--text2:#5C5C58;--text3:#9A9A94;--gold:#B8973A;--gold2:#D4AE55;--navy:#1A2B3C;--navy2:#0b1f3a;--green:#1A7A52;--red:#C0392B;--amber:#B87333;--border:#D8D4CB;--border2:#C8C3B8;--radius:6px;--radius-lg:10px}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;letter-spacing:-.01em;overflow-x:hidden}
+
+.topbar{background:var(--navy2);border-bottom:1px solid rgba(201,168,76,0.2);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.topbar-divider{width:1px;height:20px;background:rgba(201,168,76,0.2)}
+.topbar-logo{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9a84c}
+.topbar-title{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase}
+.topbar-right{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase}
+
+.hero{
+  position:relative;
+  background:radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201,168,76,0.10), transparent 60%), var(--navy2);
+  padding:120px 28px 140px;
+  text-align:center;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 700px 400px at 50% 20%, black, transparent 75%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  position:relative;
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;
+  color:#c9a84c;letter-spacing:.22em;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.hero-eyebrow .line{width:28px;height:1px;background:rgba(201,168,76,.5)}
+.hero h1{
+  position:relative;
+  font-family:'Cormorant Garamond',serif;font-weight:500;
+  font-size:clamp(48px,7vw,84px);
+  color:#fff;letter-spacing:-.01em;line-height:1.05;margin-bottom:22px;
+}
+.hero h1 em{font-style:italic;font-weight:300;color:#e8d9ae}
+.hero p.sub{
+  position:relative;
+  font-size:15px;color:rgba(255,255,255,.55);max-width:560px;margin:0 auto 44px;line-height:1.7;
+  font-weight:300;
+}
+.hero-cta{
+  position:relative;
+  display:inline-flex;align-items:center;gap:10px;
+  background:#c9a84c;color:#14202c;
+  font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:15px 30px;border-radius:100px;text-decoration:none;
+  box-shadow:0 8px 24px rgba(201,168,76,.25);
+  transition:transform .15s, box-shadow .15s;
+}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(201,168,76,.35)}
+.hero-cta svg{width:14px;height:14px}
+
+.hero-meta{
+  position:relative;
+  display:flex;justify-content:center;gap:40px;margin-top:56px;flex-wrap:wrap;
+}
+.hero-meta div{text-align:center}
+.hero-meta .n{font-family:'Cormorant Garamond',serif;font-size:30px;color:#fff;font-weight:500;line-height:1}
+.hero-meta .l{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.12em;margin-top:8px}
+.hero-meta .divider{width:1px;background:rgba(255,255,255,.12);align-self:stretch}
+
+.content{max-width:1080px;margin:0 auto;padding:80px 28px 100px}
+
+.section-label{
+  font-family:'DM Sans',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500;color:var(--text);margin-bottom:16px;letter-spacing:-.01em;
+}
+.section-desc{font-size:14px;color:var(--text2);max-width:620px;line-height:1.7;margin-bottom:48px}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:64px}
+.grid-card{background:var(--white);padding:32px 28px}
+.grid-card .icon{
+  width:38px;height:38px;border-radius:8px;background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--gold);
+}
+.grid-card h3{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;margin-bottom:10px;color:var(--text)}
+.grid-card p{font-size:12.5px;color:var(--text2);line-height:1.65}
+
+.tabs-preview{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:64px}
+.tab-chip{
+  background:var(--white);border:1px solid var(--border);border-radius:100px;
+  padding:10px 18px;font-size:11.5px;color:var(--text2);display:flex;align-items:center;gap:8px;
+}
+.tab-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+.method-row{display:flex;gap:12px;margin-bottom:64px;flex-wrap:wrap}
+.method-pill{
+  font-size:10px;font-weight:500;padding:6px 14px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;
+}
+.pill-factura{background:#EEF3FA;color:#2A5BA0}
+.pill-tarjeta{background:#F0EAF8;color:#6B3A90}
+.pill-otros{background:var(--bg2);color:var(--text2)}
+.pill-hq{background:#EEF3FA;color:#2A5BA0}
+.pill-dist{background:#F5EED8;color:#8B6520}
+.pill-bs{background:#EAF5EE;color:#1A6B3C}
+
+.foot{
+  border-top:1px solid var(--border);padding:32px 28px;text-align:center;
+  font-size:11px;color:var(--text3);
+}
+.foot b{color:var(--text2)}
+
+@media(max-width:700px){
+  .grid-3{grid-template-columns:1fr}
+  .hero{padding:90px 20px 100px}
+  .hero-meta{gap:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">Provalliance</div>
+    <div class="topbar-divider"></div>
+    <div class="topbar-title">Marketing · Control 2026</div>
+  </div>
+  <div class="topbar-right">Ene – Jul 2026</div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow"><span class="line"></span> Reconciliación de gasto · Marketing &amp; Contabilidad <span class="line"></span></div>
+  <h1>Control de<br><em>Marketing</em> 2026</h1>
+  <p class="sub">Comparativa de gasto real, previsión de Marketing y presupuesto, por unidad de negocio y por proveedor — mes a mes, sin sorpresas.</p>
+  <a class="hero-cta" href="Control_Marketing_2026.html">
+    Abrir el dashboard
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+  <div class="hero-meta">
+    <div><div class="n">3</div><div class="l">Escenarios</div></div>
+    <div class="divider"></div>
+    <div><div class="n">8</div><div class="l">Business Units</div></div>
+    <div class="divider"></div>
+    <div><div class="n">4</div><div class="l">Vistas</div></div>
+    <div class="divider"></div>
+    <div><div class="n">100%</div><div class="l">Líneas contables</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section-label">Qué compara</div>
+  <div class="section-title">Tres escenarios, un mismo lenguaje</div>
+  <p class="section-desc">El dashboard cruza el gasto tal y como queda registrado en el ERP con lo que Marketing reporta en su plantilla mensual, línea a línea y sin exclusiones — para que cualquier pivote que hagas sobre el fichero original cuadre exactamente con lo que ves aquí.</p>
+
+  <div class="grid-3">
+    <div class="grid-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg>
+      </div>
+      <h3>Contabilidad</h3>
+      <p>Todas las líneas del extracto contable: facturas, tarjeta, provisiones, periodificaciones, ajustes, abonos y comisiones.</p>
+    </div>
+    <div class="grid-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+      </div>
+      <h3>Previsto Marketing</h3>
+      <p>Lo reportado en la plantilla mensual del equipo de Marketing, filtrado a Factura y Tarjeta de Crédito.</p>
+    </div>
+    <div class="grid-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20" stroke-dasharray="3 3"/></svg>
+      </div>
+      <h3>Presupuesto</h3>
+      <p>Pendiente de recibir el fichero — se incorporará como tercer escenario en cuanto esté disponible.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Cómo navegarlo</div>
+  <div class="section-title">Cuatro vistas, un mismo filtro</div>
+  <p class="section-desc">Los filtros de BU y periodo aplican a las cuatro pestañas. Cada tabla permite hacer clic en una fila para ver el detalle mensual de ese proveedor.</p>
+
+  <div class="tabs-preview">
+    <div class="tab-chip"><span class="dot"></span>Resumen</div>
+    <div class="tab-chip"><span class="dot"></span>Evolución mensual</div>
+    <div class="tab-chip"><span class="dot"></span>Contabilidad</div>
+    <div class="tab-chip"><span class="dot"></span>Diferencias</div>
+  </div>
+
+  <div class="section-label">Clasificación</div>
+  <div class="section-title">Método y unidad de negocio</div>
+  <p class="section-desc">Cada línea se etiqueta por método de pago y por BU, para poder filtrar y cuadrar con precisión.</p>
+
+  <div class="method-row">
+    <span class="method-pill pill-factura">Factura</span>
+    <span class="method-pill pill-tarjeta">Tarjeta</span>
+    <span class="method-pill pill-otros">Otros</span>
+    <span class="method-pill pill-hq">HQ</span>
+    <span class="method-pill pill-dist">DIST</span>
+    <span class="method-pill pill-bs">BSTORES</span>
+  </div>
+
+</div>
+
+<div class="foot">
+  <b>Provalliance</b> · Marketing · Control 2026 — Ene&ndash;Jul 2026 · Datos: Contabilidad ERP + Plantilla Marketing
+</div>
+
+</body>
+</html>
