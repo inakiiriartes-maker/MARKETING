@@ -3,437 +3,347 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketing Dashboard 2026 — Provalliance</title>
+<title>Control de Marketing — Provalliance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F5F3EE;--bg2:#EDEAE3;--bg3:#E4E0D6;--white:#FFFFFF;--text:#1A1A18;--text2:#5C5C58;--text3:#9A9A94;--gold:#B8973A;--gold2:#D4AE55;--navy:#1A2B3C;--navy2:#0b1f3a;--green:#1A7A52;--red:#C0392B;--amber:#B87333;--border:#D8D4CB;--border2:#C8C3B8;--radius:6px;--radius-lg:10px}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:13px;min-height:100vh;letter-spacing:-.01em}
+
 .topbar{background:var(--navy2);border-bottom:1px solid rgba(201,168,76,0.2);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;flex-wrap:wrap}
 .topbar-left{display:flex;align-items:center;gap:16px}
 .topbar-divider{width:1px;height:20px;background:rgba(201,168,76,0.2)}
 .topbar-logo{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9a84c}
 .topbar-title{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase}
+.back-link{font-size:10.5px;color:rgba(255,255,255,.55);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:6px;padding:0 16px;border-left:1px solid rgba(201,168,76,.15)}
+.back-link:hover{color:#c9a84c}
 .topbar-right{display:flex;align-items:stretch}
 .filter-group{display:flex;align-items:center;gap:8px;padding:0 16px;border-left:1px solid rgba(201,168,76,.15)}
 .filter-group label{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}
 .filter-group select{background:transparent;color:rgba(255,255,255,.85);border:none;font-size:11px;cursor:pointer;outline:none;font-family:inherit;padding:2px 0}
 .filter-group select option{background:#1a2b3c;color:#fff}
+
 .tabs{background:var(--white);border-bottom:1px solid var(--border);padding:0 28px;display:flex;overflow-x:auto}
 .tab{padding:12px 16px;font-size:11px;font-weight:400;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;transition:color .15s}
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--text);border-bottom-color:var(--gold);font-weight:500}
-.content{padding:24px 28px; max-width:1360px; margin:0 auto;}
-.kpi-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px}
+
+.content{padding:24px 28px;max-width:1280px;margin:0 auto}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px}
 .kpi{background:var(--white);padding:20px 20px 18px}
 .kpi.highlight{background:var(--navy)}
-.kpi.pending{opacity:.6}
 .kpi-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px;font-weight:500}
 .kpi.highlight .kpi-label{color:rgba(255,255,255,.5)}
-.kpi-value{font-size:24px;font-weight:300;color:var(--text);line-height:1;letter-spacing:-.03em}
+.kpi-value{font-size:23px;font-weight:300;color:var(--text);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .kpi.highlight .kpi-value{color:#fff}
-.kpi.pending .kpi-value{font-size:16px;color:var(--text3)}
+.kpi-value.pos{color:var(--green)}
+.kpi-value.neg{color:var(--red)}
 .kpi-sub{font-size:10px;color:var(--text3);margin-top:6px}
 .kpi.highlight .kpi-sub{color:rgba(255,255,255,.45)}
-.tag{display:inline-block;font-size:9px;font-weight:500;padding:2px 7px;border-radius:20px;letter-spacing:.04em}
-.tag-pos{background:#E8F5EF;color:var(--green)}
-.tag-neg{background:#FBEAEA;color:var(--red)}
-.tag-neu{background:#F5EED8;color:var(--amber)}
+
 .card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 24px;margin-bottom:16px}
-.card-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;gap:8px;flex-wrap:wrap}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:10px;flex-wrap:wrap}
 .card-title{font-size:13px;font-weight:500;color:var(--text)}
-.card-hint{font-size:10px;color:var(--text3);letter-spacing:.04em}
-.card-header select{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:var(--radius);padding:5px 10px;font-size:11px;font-family:inherit}
+.card-hint{font-size:10px;color:var(--text3);letter-spacing:.03em;margin-top:2px}
+.seg-control{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:3px}
+.seg-btn{border:none;background:transparent;font-family:inherit;font-size:10.5px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text2);padding:6px 14px;border-radius:100px;cursor:pointer;white-space:nowrap}
+.seg-btn.active{background:var(--navy);color:#fff}
+
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:12px}
 thead th{font-size:9px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;background:var(--bg)}
 tbody td{padding:9px 12px;border-bottom:1px solid var(--bg2);vertical-align:middle}
 tbody tr:last-child td{border-bottom:none}
-tbody tr.clickable:hover{background:var(--bg);cursor:pointer}
 .num{text-align:right;font-variant-numeric:tabular-nums;font-size:11.5px}
-.pos{color:var(--green)}.neg{color:var(--red)}.dim{color:var(--text3)}
-.bu-pill{display:inline-block;font-size:9px;font-weight:500;padding:3px 8px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase}
-.pill-hq{background:#EEF3FA;color:#2A5BA0}.pill-dist{background:#F5EED8;color:#8B6520}.pill-bs{background:#EAF5EE;color:#1A6B3C}.pill-b2c{background:#F0EAF8;color:#6B3A90}.pill-other{background:var(--bg2);color:var(--text2)}
-.metodo-pill{display:inline-block;font-size:9px;font-weight:500;padding:3px 8px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;margin-right:3px}
-.pill-factura{background:#EEF3FA;color:#2A5BA0}.pill-tarjeta{background:#F0EAF8;color:#6B3A90}.pill-otros{background:var(--bg2);color:var(--text2)}
-.row-total td{font-weight:500;background:var(--bg);border-top:1px solid var(--border2) !important}
-.row-total-grand td{font-weight:600;background:var(--navy);color:#fff !important;border-top:2px solid var(--border2) !important}
-.drill-panel{background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius);padding:16px 18px;margin-top:12px;display:none}
-.drill-panel.open{display:block}
-.drill-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.drill-title{font-size:11px;font-weight:500;color:var(--text);text-transform:uppercase;letter-spacing:.08em}
-.drill-close{cursor:pointer;color:var(--text3);font-size:18px;padding:0 4px;background:none;border:none}
-.drill-close:hover{color:var(--text)}
-.diff-section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);padding:8px 12px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.diff-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.foot-note{font-size:11px;color:var(--text3);border-top:1px solid var(--border);margin-top:24px;padding-top:16px;line-height:1.65;max-width:1360px;margin-left:auto;margin-right:auto}
+.ok{color:var(--green)}
+.bad{color:var(--red);font-weight:600}
+.dim{color:var(--text3)}
+.row-total td{font-weight:600;background:var(--bg);border-top:1px solid var(--border2) !important}
+
+.pill{display:inline-block;font-size:9px;font-weight:500;padding:3px 8px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.pill-brand{background:#F5EED8;color:#8B6520}
+.pill-digital{background:#EEF3FA;color:#2A5BA0}
+.pill-otros{background:var(--bg2);color:var(--text2)}
+.pill-factura{background:#EEF3FA;color:#2A5BA0}
+.pill-tarjeta{background:#F0EAF8;color:#6B3A90}
+
+.empty-state{padding:60px 20px;text-align:center;color:var(--text3)}
+.empty-state .big{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--text2);margin-bottom:8px;font-style:italic}
+.empty-state p{font-size:12px;max-width:400px;margin:0 auto;line-height:1.6}
+
+.note{font-size:11px;color:var(--text3);margin-top:14px;line-height:1.6;border-top:1px solid var(--bg2);padding-top:14px}
+.note b{color:var(--text2)}
+
+.foot-note{font-size:11px;color:var(--text3);border-top:1px solid var(--border);margin-top:8px;padding-top:16px;line-height:1.65;max-width:1280px;margin-left:auto;margin-right:auto}
 .foot-note b{color:var(--text2)}
-@media(max-width:768px){.topbar{flex-wrap:wrap;height:auto;padding:12px 16px;gap:8px}.topbar-right{flex-wrap:wrap;width:100%}.filter-group{padding:6px 10px;border-left:none;border-top:1px solid rgba(201,168,76,.15)}.content{padding:16px}}
+
+[hidden]{display:none!important}
+
+@media(max-width:768px){
+  .topbar{flex-wrap:wrap;height:auto;padding:12px 16px;gap:0}
+  .topbar-right{flex-wrap:wrap;width:100%}
+  .filter-group,.back-link{padding:6px 10px;border-left:none;border-top:1px solid rgba(201,168,76,.15)}
+  .content{padding:16px}
+  .card-header{align-items:flex-start}
+}
 </style>
 </head>
 <body>
+
 <div class="topbar">
   <div class="topbar-left">
     <div class="topbar-logo">Provalliance</div>
     <div class="topbar-divider"></div>
-    <div class="topbar-title">Marketing · Control 2026</div>
+    <div class="topbar-title">Marketing · Seguimiento vs Contabilidad</div>
   </div>
   <div class="topbar-right">
+    <a class="back-link" href="index.html">← Portada</a>
     <div class="filter-group">
-      <label>BU</label>
-      <select id="buFilter" onchange="render()"><option value="ALL">Todas</option></select>
-    </div>
-    <div class="filter-group">
-      <label>Período</label>
-      <select id="monthFilter" onchange="render()"><option value="ALL">YTD Ene–Jul</option></select>
+      <label>Mes</label>
+      <select id="monthFilter">
+        <option value="julio">Julio 2026</option>
+        <option value="agosto">Agosto 2026</option>
+      </select>
     </div>
   </div>
 </div>
+
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('resumen',this)">Resumen</div>
-  <div class="tab" onclick="switchTab('mensual',this)">Evolución mensual</div>
-  <div class="tab" onclick="switchTab('contabilidad',this)">Contabilidad</div>
-  <div class="tab" onclick="switchTab('diferencias',this)">Diferencias</div>
+  <div class="tab active" data-tab="distribucion">Distribución</div>
+  <div class="tab" data-tab="hq">HQ</div>
+  <div class="tab" data-tab="tarjeta">Tarjeta</div>
 </div>
+
 <div class="content">
 
-<!-- ===================== RESUMEN ===================== -->
-<div id="tab-resumen">
-  <div class="kpi-strip" id="kpi-cards"></div>
-  <div class="card">
-    <div class="card-header"><span class="card-title">Comparativa por unidad de negocio</span><span class="card-hint">Clic en fila → detalle proveedores</span></div>
-    <div class="table-wrap"><table><thead><tr><th>BU</th><th class="num">Contabilidad</th><th class="num">Previsto Marketing</th><th class="num">Diferencia</th><th class="num">Dif. %</th></tr></thead><tbody id="tbody-resumen"></tbody></table></div>
-    <div class="drill-panel" id="drill-resumen"><div class="drill-header"><span class="drill-title" id="drill-resumen-title">Detalle</span><button class="drill-close" onclick="closeDrill('drill-resumen')">×</button></div><div class="table-wrap"><table><thead><tr id="drill-resumen-thead"></tr></thead><tbody id="drill-resumen-body"></tbody></table></div></div>
+  <!-- ===================== DISTRIBUCION ===================== -->
+  <div id="tab-distribucion" class="tabpanel">
+    <div class="kpi-strip" id="dist-kpis"></div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Distribución — Seguimiento vs Contabilidad</div>
+          <div class="card-hint" id="dist-hint"></div>
+        </div>
+      </div>
+      <div id="dist-body"></div>
+    </div>
   </div>
-</div>
 
-<!-- ===================== EVOLUCIÓN MENSUAL ===================== -->
-<div id="tab-mensual" style="display:none">
-  <div class="kpi-strip" id="kpi-cards-m"></div>
-  <div class="card">
-    <div class="card-header"><span class="card-title">Gasto mensual — Contabilidad vs Previsto Marketing</span><span class="card-hint" id="mensual-hint"></span></div>
-    <div class="table-wrap"><table><thead><tr id="mensual-thead"></tr></thead><tbody id="tbody-mensual"></tbody></table></div>
+  <!-- ===================== HQ ===================== -->
+  <div id="tab-hq" class="tabpanel" hidden>
+    <div class="kpi-strip" id="hq-kpis"></div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">HQ — Seguimiento vs Contabilidad</div>
+          <div class="card-hint" id="hq-hint"></div>
+        </div>
+        <div class="seg-control" id="hq-division-control">
+          <button class="seg-btn active" data-div="ALL">Todas</button>
+          <button class="seg-btn" data-div="BRAND">Brand</button>
+          <button class="seg-btn" data-div="DIGITAL">Digital</button>
+        </div>
+      </div>
+      <div id="hq-body"></div>
+      <div class="note" id="hq-note" hidden><b>Otros / Sin clasificar</b> agrupa el consolidado de Tarjeta y proveedores que aparecen en Contabilidad sin una división Brand/Digital asignada en el seguimiento de Marketing. Se muestra solo con el filtro «Todas».</div>
+    </div>
   </div>
-</div>
 
-<!-- ===================== CONTABILIDAD ===================== -->
-<div id="tab-contabilidad" style="display:none">
-  <div class="kpi-strip" id="kpi-cards-c"></div>
-  <div class="card">
-    <div class="card-header"><span class="card-title">Contabilidad por tercero</span><span class="card-hint">Clic en fila → detalle mensual</span></div>
-    <div class="table-wrap"><table><thead><tr id="contab-thead-row"></tr></thead><tbody id="tbody-contabilidad"></tbody></table></div>
-    <div class="drill-panel" id="drill-contab"><div class="drill-header"><span class="drill-title" id="drill-contab-title">Detalle</span><button class="drill-close" onclick="closeDrill('drill-contab')">×</button></div><div class="table-wrap"><table><thead><tr><th>Mes</th><th class="num">Importe</th><th class="num">Acumulado</th></tr></thead><tbody id="drill-contab-body"></tbody></table></div></div>
+  <!-- ===================== TARJETA ===================== -->
+  <div id="tab-tarjeta" class="tabpanel" hidden>
+    <div class="kpi-strip" id="tar-kpis"></div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Tarjeta — Desglose de movimientos</div>
+          <div class="card-hint" id="tar-hint"></div>
+        </div>
+      </div>
+      <div id="tar-body"></div>
+    </div>
   </div>
-</div>
 
-<!-- ===================== DIFERENCIAS ===================== -->
-<div id="tab-diferencias" style="display:none">
-  <div class="kpi-strip" id="kpi-cards-d"></div>
-  <div class="card">
-    <div class="card-header"><span class="card-title">Diferencias — Contabilidad vs Previsto Marketing, por tercero</span><span class="card-hint">Sólo BU con dato de Marketing (HQ, DIST, BSTORES) · Clic en fila → detalle mensual</span></div>
-    <div class="table-wrap"><table><thead><tr><th>Proveedor / Tercero</th><th>BU</th><th>Método</th><th class="num">Contabilidad</th><th class="num">Previsto Marketing</th><th class="num">Diferencia</th><th>Estado</th></tr></thead><tbody id="tbody-diferencias"></tbody></table></div>
-    <div class="drill-panel" id="drill-diff"><div class="drill-header"><span class="drill-title" id="drill-diff-title">Detalle</span><button class="drill-close" onclick="closeDrill('drill-diff')">×</button></div><div class="table-wrap"><table><thead><tr><th>Mes</th><th class="num">Contabilidad</th><th class="num">Previsto</th><th class="num">Diferencia</th></tr></thead><tbody id="drill-diff-body"></tbody></table></div></div>
-  </div>
-</div>
-
-<div class="foot-note">
-  <b>Metodología:</b> "Contabilidad" suma absolutamente todas las líneas del extracto contable (Facturas, Tarjeta, Provisiones, Periodificaciones, Ajustes, Abonos, Comisiones) — coincide con cualquier pivote que se haga directamente sobre el fichero de contabilidad, sin exclusiones. Las líneas sin tercero se reatribuyen automáticamente al proveedor real cuando su comentario contable lo identifica con suficiente confianza (p. ej. "Periodifi. Uberall…" y "RECLAS. UBERALL…" se unen a UBERALL GMBH; "PERIOD. REAL MADRID…" a REAL MADRID C.F.; "RECLAS MADRID TROPHY" a MADRID TROPHY PROMOTION SLU) — así un mismo proveedor no aparece partido en varias líneas. Cuando el comentario no identifica un proveedor conocido (p. ej. "RECLAS MK 2025", "RECLAS ARRASTRE", "FRA MMO"), la línea se mantiene aparte marcada como "(en blanco) …", con el comentario tal cual, para no forzar una atribución incierta. "Previsto Marketing" incluye únicamente las filas de la plantilla de Marketing con método de pago Factura o Tarjeta de Crédito; las filas sin proveedor se identifican por su descripción. La plantilla de Marketing sólo reporta actualmente HQ, DIST y BSTORES — por eso el resto de BU no tienen columna de previsto. El cuadre por proveedor normaliza nombres (mayúsculas, sin acentos, sin sufijos societarios); las diferencias restantes son reales, no de formato. Cada proveedor se clasifica también por Método (Factura / Tarjeta / Otros); un mismo proveedor puede tener varias líneas si combina, por ejemplo, una factura real y una periodificación asociada. Presupuesto: pendiente de recibir el fichero correspondiente — se incorporará como tercer escenario en cuanto esté disponible.
-</div>
+  <div class="foot-note"><b>Provalliance</b> · Marketing · Comparativa Seguimiento (reportado por Marketing) vs Contabilidad (ERP) · Diferencia = Contabilidad − Seguimiento</div>
 
 </div>
+
 <script>
-const LED = {"meses": ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"], "buns": [{"code": "B2BECOMM", "label": "B2B ECOMM"}, {"code": "B2CECOMM", "label": "B2C ECOMM"}, {"code": "BSTORES", "label": "BSTORES"}, {"code": "DIST", "label": "DIST"}, {"code": "EDUCACION", "label": "EDUCACION"}, {"code": "FRANQUICIA", "label": "FRANQUICIA"}, {"code": "HQ", "label": "HQ"}, {"code": "PROPIOS", "label": "PROPIOS"}], "contab": {"B2BECOMM": {"mes": [0.0, 3870.0, 557.88, 1427.81, 4054.27, 862.94, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 10772.9, "rows": [{"name": "ABRAHAM E.ESCUDERO AUGUSTO", "metodos": ["Factura"], "vector": [0.0, 3800.0, 0.0, 0.0, 2960.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "WILD AUDIENCE S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 262.94, 788.82, 0.0, 262.94, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ARMY EVENTOS SL", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 946.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ZOOM VIDEO COMMUNICATIONS INC", "metodos": ["Factura"], "vector": [0.0, 0.0, 294.94, 294.94, 147.47, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CLUB FIGARO PELUQUERIA CREATIVA ESP", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 600.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FUNDACJA ROZWOJU PRZEDSIEBIORCZOSCI", "metodos": ["Factura"], "vector": [0.0, 70.0, 0.0, 344.05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "B2CECOMM": {"mes": [3410.49, 9072.29, 5831.77, 6207.25, 9517.37, 12338.25, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 46377.42, "rows": [{"name": "ACREEDOR VISAS", "metodos": ["Tarjeta"], "vector": [3410.49, 5576.49, 5831.77, 5547.25, 8857.37, 11018.22, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SEM Consulting BCN SL", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 660.0, 660.0, 1320.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "GOOGLE IRELAND LIMITED", "metodos": ["Factura"], "vector": [0.0, 1840.3, 0.0, 0.0, 0.0, 0.03, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FUNDACJA ROZWOJU PRZEDSIEBIORCZOSCI", "metodos": ["Factura"], "vector": [0.0, 1655.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "BSTORES": {"mes": [0.0, 0.0, 16437.87, 22445.27, 3997.47, 2348.27, 2348.27, 2348.27, 2348.27, 2348.27, 2348.27, 0.0], "total": 56970.23, "rows": [{"name": "MADRID TROPHY PROMOTION SLU", "metodos": ["Factura"], "vector": [0.0, 0.0, 35224.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "(en blanco) PERIODIFICACION FRA MMO", "metodos": ["Otros"], "vector": [0.0, 0.0, 2348.27, 2348.27, 2348.27, 2348.27, 2348.27, 2348.27, 2348.27, 2348.27, 2348.27, 0.0]}, {"name": "(en blanco) Recl. Periodific FRA MMO", "metodos": ["Otros"], "vector": [0.0, 0.0, -21134.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SF & MACARENA DISEÑO INTEGRAL S.L.", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 20097.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TEMPS MULTIWORK, S.L. ETT", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 1649.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "DIST": {"mes": [12967.96, 14493.14, 25800.72, 28340.48, 18280.26, 19873.78, 8782.5, 10666.0, 4000.0, 4000.0, 4000.0, 4000.0], "total": 155204.84, "rows": [{"name": "(en blanco) RECLAS MK 2025 03", "metodos": ["Otros"], "vector": [0.0, 0.0, 6666.0, 0.0, 6666.0, 6666.0, 6666.0, 6666.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "REAL MADRID C.F.", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 4000.0, 4000.0, 4000.0, 4000.0, 4000.0, 4000.0, 4000.0]}, {"name": "JESSICA DEL ARBOL JIMENEZ", "metodos": ["Factura", "Otros"], "vector": [1473.82, 3277.54, 1315.94, 9321.06, 3214.26, 3973.78, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "HMY YUDIGAR EQUIPAMIENTO, S.L.U", "metodos": ["Factura"], "vector": [0.0, 0.0, 12733.87, 1812.81, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "(en blanco) RECLAS MK 2025 01", "metodos": ["Otros"], "vector": [6666.0, 6666.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JESSY ART ZONE, S.L.", "metodos": ["Factura", "Otros"], "vector": [1198.14, -432.8, 1949.85, 6120.0, 0.0, 3300.0, -2300.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OLLO ESTUDIO CREATIVO SL", "metodos": ["Factura", "Otros"], "vector": [3630.0, 1800.0, 1095.0, 735.0, 0.0, 1174.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ABRAHAM E.ESCUDERO AUGUSTO", "metodos": ["Factura", "Otros"], "vector": [0.0, 770.0, 0.0, 2900.0, 3800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "(en blanco) RECLAS MK 2025 0426", "metodos": ["Otros"], "vector": [0.0, 0.0, 0.0, 6666.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SEMILLA FOOD FAMILY S.L", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 2800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FERNANDO CASCALES RODRÍGUEZ", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 228.0, 0.0, 0.0, 760.0, 1307.5, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DB COSMETIC UNIPESSOAL LDA", "metodos": ["Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 1800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SHOCK MODELS AGENCY SLU", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 1800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "EVOL XXI", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 1312.06, 891.0, 0.0, 0.0, -891.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ACR 20", "metodos": ["Factura"], "vector": [0.0, 0.0, 500.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CHIC LOVE FASHION BRAND SL", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 288.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "BAKED BLISS SL ", "metodos": ["Factura", "Otros"], "vector": [0.0, 218.9, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "YUDIGAR G.S., S.A.U", "metodos": ["Otros"], "vector": [0.0, 2193.5, 0.0, -2193.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "EDUCACION": {"mes": [0.0, 0.0, 0.0, 1039.98, 519.99, 2120.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 3679.99, "rows": [{"name": "VORTICE INNOVACION DIGITAL", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 1039.98, 519.99, 1760.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "MANDALORIAN SOLUTIONS SL", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 360.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "FRANQUICIA": {"mes": [0.0, 0.0, 836.31, 1181.84, 0.0, 548.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 2566.15, "rows": [{"name": "WAAPITI, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 836.31, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "U.T.E. ZIGZAG RETAIL 1 99 RETAIL PR", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 598.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TALENT CONTAINER S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 583.84, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FERNANDO CASCALES RODRÍGUEZ", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 548.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "HQ": {"mes": [79078.71, 34593.58, 74506.93, 44615.29, 41315.77, 41642.47, -8081.85, 15110.51, 2610.51, 2610.51, 2610.51, 2610.51], "total": 333223.45, "rows": [{"name": "(en blanco) RECLAS 0426 ARRASTRE 2025", "metodos": ["Otros"], "vector": [0.0, 0.0, 0.0, 12500.0, 12500.0, 12500.0, 12500.0, 12500.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "EDELMAN SPAIN, S.A.", "metodos": ["Factura"], "vector": [0.0, -15000.0, 0.0, 0.0, 0.0, -30000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ACREEDOR VISAS", "metodos": ["Tarjeta"], "vector": [8055.3, 7488.09, 9025.0, 8093.23, 2433.85, 2087.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TEAM TOP VISUAL S.L.", "metodos": ["Factura", "Otros"], "vector": [0.0, 513.0, 18382.66, -768.0, 5695.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "WEBMEFY ESPAÑA, SL", "metodos": ["Factura", "Otros"], "vector": [4125.0, 4125.0, 4675.0, 4125.0, 4125.0, -550.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "GOOGLE IRELAND LIMITED", "metodos": ["Factura", "Otros"], "vector": [4349.0, 5375.72, 6008.31, -0.07, 0.0, 8653.94, -6192.72, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DEVENTS PLATAFORM SCP", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 16604.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FABRA COMUNICACION SL", "metodos": ["Factura", "Otros"], "vector": [2400.0, 0.0, 4800.0, 4800.0, 2400.0, 2400.0, -2400.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "UBERALL GMBH", "metodos": ["Factura", "Otros"], "vector": [1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1325.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0]}, {"name": "(en blanco) RECLAS 0126 ARRASTRE 2025", "metodos": ["Otros"], "vector": [12500.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "(en blanco) RECLAS 0326 ARRASTRE 2025", "metodos": ["Otros"], "vector": [0.0, 0.0, 12500.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "(en blanco) RECLAS 0226 ARRASTRE 2025", "metodos": ["Otros"], "vector": [0.0, 12500.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CARISMATIC SL ", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 10800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "GOVENTURE TECHNOLOGIES SL", "metodos": ["Otros"], "vector": [10240.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OLLO ESTUDIO CREATIVO SL", "metodos": ["Factura", "Otros"], "vector": [2950.0, 2800.0, 889.97, 2700.0, 700.0, 450.0, -700.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CARVING LABS SAS", "metodos": ["Factura", "Otros"], "vector": [2300.0, 2300.0, 4600.0, 2300.0, 2300.0, 2300.0, -6900.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "21NOVA GROWTH SL", "metodos": ["Factura", "Otros"], "vector": [4541.0, 0.0, 4533.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DOS MODELS SL", "metodos": ["Factura", "Otros"], "vector": [8766.77, 0.0, 0.0, 30.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ABRAHAM E.ESCUDERO AUGUSTO", "metodos": ["Factura", "Otros"], "vector": [3000.0, 0.0, 0.0, 4475.0, 700.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OMNIPRO3D", "metodos": ["Factura", "Otros"], "vector": [0.0, 200.0, 1000.0, 0.0, 4195.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SMS PUBLI - COMMIFY IBERIA, S.L.", "metodos": ["Factura", "Otros"], "vector": [1600.82, 0.0, 1863.65, 1740.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "VIEW MANAGEMENT MADRID S.L.", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 5149.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ANGELS PRJCT, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 5000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "YOU GLOW AGENCY SL", "metodos": ["Factura", "Otros"], "vector": [3300.0, 400.0, 1061.04, -206.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TEAM VALIENTE SL", "metodos": ["Factura"], "vector": [0.0, 4000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ADQUIERE PUBLICIDAD SL", "metodos": ["Factura", "Otros"], "vector": [83.0, 3439.97, 0.0, 30.0, 0.0, 83.62, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "MEDIAPOST SPAIN SL", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 2373.67, 3396.16, -2373.67, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "M PILAR LLOMBART DE ARCE", "metodos": ["Factura", "Otros"], "vector": [3000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "5TH AVE MODEL MANAGEMENT, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 2200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Jose Luis Tabueña Acín", "metodos": ["Factura", "Otros"], "vector": [0.0, 900.0, 0.0, 0.0, 0.0, 1200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "YKONE NMA S.R.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 2100.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ALEXANDRE ARZA FONQUERNA", "metodos": ["Factura"], "vector": [0.0, 2040.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "LAB MEDIA Y COMUNICACIÓN, S.L.", "metodos": ["Otros"], "vector": [0.0, 0.0, 2033.47, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "PRAGMATISTS SP. Z O. O.", "metodos": ["Factura"], "vector": [2027.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "BEFEGA INVEST, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 2000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DB COSMETIC UNIPESSOAL LDA", "metodos": ["Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1800.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DAVID MERCHANTE CARRILLO", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 450.0, 1200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "WASSABI STEREO SL", "metodos": ["Otros"], "vector": [800.0, 610.0, 150.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SOCIEDAD ESPAÑOLA DE RADIODIFUSION", "metodos": ["Factura"], "vector": [1255.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Alejandra Dominguez Brito", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 1200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "BEATRIZ PASCUAL JIMÉNEZ", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 1965.97, -765.97, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DIVINA ESTRATEGIA, S.L.", "metodos": ["Factura", "Otros"], "vector": [285.0, 285.0, 1199.85, -629.85, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ITZIAR JIMENEZ BARROS", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 1030.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ALMUDENA CARNICERO", "metodos": ["Factura"], "vector": [0.0, 0.0, 1000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ESTHER MARTIN SEPULVEDA", "metodos": ["Factura", "Otros"], "vector": [600.0, 0.0, 0.0, -100.0, 300.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "COOL FACE ENTERPRISE, S.L.", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 836.9, 0.0, -36.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ALVARO VALENTIN ROMERO", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 680.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "LIDIA HERNÁNDEZ DIÉGUEZ", "metodos": ["Factura", "Otros"], "vector": [0.0, 600.0, 0.0, 39.19, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JUAN RAMON DUARTE  FERNANDEZ-MIJARE", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 630.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "KLAVIYO INC", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 630.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OTILIA SOLUCIONES GASTRÓNOMICAS S.L", "metodos": ["Factura"], "vector": [0.0, 435.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FERNANDO CASCALES RODRÍGUEZ", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 95.0, 95.0, 454.0, -279.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JOSE CARLOS LORA SANCHEZ", "metodos": ["Otros"], "vector": [0.0, 0.0, 0.0, 350.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JACOBO SUÁREZ MUÑOZ", "metodos": ["Factura", "Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 200.0, 300.0, -150.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SHOPIFY INTERNATIONAL LIMITED", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 145.64, 109.77, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "MARTIN SUQUIA MONFORT", "metodos": ["Factura", "Otros"], "vector": [200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OVH HISPANO S.L.U.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 181.37, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TYPEFORM, S.L.", "metodos": ["Factura", "Otros"], "vector": [55.0, -55.0, 55.0, 0.0, 0.0, 55.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "MADRID TROPHY PROMOTION SLU", "metodos": ["Otros"], "vector": [0.0, 0.0, -14089.6, 1565.52, 1565.51, 1565.51, 1565.51, 1565.51, 1565.51, 1565.51, 1565.51, 1565.51]}, {"name": "BANCO BILBAO VIZCAIA ARGENTARIA, SA", "metodos": ["Otros"], "vector": [1600.82, 0.0, -1600.82, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ACTIVE CAMPAIGN LLC", "metodos": ["Otros"], "vector": [0.0, 291.5, -291.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ACKERMAN MARIA AGUSTINA", "metodos": ["Otros"], "vector": [0.0, 300.0, 0.0, -300.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "UNIFORMES GARYS", "metodos": ["Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 431.0, -431.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "WELLA PRESTIGE SP, S.L.U.", "metodos": ["Otros"], "vector": [0.0, 0.0, 0.0, 0.0, -15000.0, 15000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CRISANTO BLANCO SANCHEZ", "metodos": ["Otros"], "vector": [0.0, 0.0, 0.0, 0.0, 1200.0, 0.0, -1200.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "PROPIOS": {"mes": [885.0, 1250.0, 546.0, 2223.1, 2800.0, 2466.26, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 10170.36, "rows": [{"name": "LORENA ISABEL VEGA DEL RÍO", "metodos": ["Factura"], "vector": [800.0, 800.0, 0.0, 2223.1, 0.0, 1566.26, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TEAM TOP VISUAL S.L.", "metodos": ["Factura"], "vector": [85.0, 0.0, 546.0, 0.0, 2800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SOCIEDAD ESPAÑOLA DE RADIODIFUSION", "metodos": ["Factura"], "vector": [0.0, 450.0, 0.0, 0.0, 0.0, 900.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}}, "segui": {"B2BECOMM": {"mes": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 0.0, "rows": []}, "B2CECOMM": {"mes": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 0.0, "rows": []}, "BSTORES": {"mes": [0.0, 0.0, 1000.0, 60536.3, 13803.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 75339.6, "rows": [{"name": "MADRID TROPHY PROMOTION SLU", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 35224.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SF & MACARENA DISEÑO INTEGRAL S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 20097.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "M.DIFUSION Y CATERING, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 12048.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "MUDANZAS LOPEZ - MUDANZAS JOLOFER,", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 5200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Azafatas MMO26", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 1649.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "3D CREACIONES", "metodos": ["Factura"], "vector": [0.0, 0.0, 1000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "COMPAÑIA DE ASISTENCIAS GENERALES", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 105.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Gifting Superbelen Open de Tenis (tarjeta Blanca) - MMO", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 15.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "DIST": {"mes": [5103.82, 7061.9, 15868.93, 23671.02, 14767.74, 64539.41, 500.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 131512.82, "rows": [{"name": "REAL MADRID C.F.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 48000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JESSICA DEL ARBOL JIMENEZ", "metodos": ["Factura"], "vector": [1473.82, 0.0, 0.0, 9378.54, 5848.26, 7693.41, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "HMY YUDIGAR EQUIPAMIENTO, S.L.U", "metodos": ["Factura"], "vector": [0.0, 2193.5, 12733.87, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OLLO ESTUDIO CREATIVO SL", "metodos": ["Factura"], "vector": [3630.0, 1800.0, 1095.0, 4080.0, 0.0, 1174.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JESSY ART ZONE, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 2449.85, 2300.0, 6912.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ABRAHAM E.ESCUDERO AUGUSTO", "metodos": ["Factura"], "vector": [0.0, 770.0, 0.0, 2900.0, 3820.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "EVOL XXI", "metodos": ["Factura"], "vector": [0.0, 0.0, 1312.06, 891.36, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FERNANDO CASCALES RODRÍGUEZ", "metodos": ["Factura"], "vector": [0.0, 1079.5, 228.0, 96.0, 0.0, 760.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Píldoras Formativas - Modelos LAURA", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 1800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DB COSMETIC UNIPESSOAL LDA", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 1800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Insercion en revista RUI - TOM SOBRE TOM", "metodos": ["Factura"], "vector": [0.0, 1000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Píldoras Formativas - Estilismo", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 730.52, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Píldoras Formativas - Modelos ANA", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 720.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Píldoras Formativas - Modelos DIANA", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 720.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Píldoras Formativas - Estilismo Devol", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, -517.65, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ACR 20", "metodos": ["Factura"], "vector": [0.0, 0.0, 500.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "PELUQUERO SUSTITUTO JUANMY MEDIALDEA", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 500.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Campaña Paid Juanmy Medialdea I", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 471.37, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CATERING FORMAICÓN VALENCIA CONGRESO PELUQUEROS", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 232.83, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Catering formación Barcelona", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 224.76, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "BAKED BLISS SL ", "metodos": ["Factura"], "vector": [0.0, 218.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Píldoras Formativas - Catering", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 189.57, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Formación salones LA DIOSA - Catering comida", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 183.35, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Fee Campaña Paid", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 120.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "EDUCACION": {"mes": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 0.0, "rows": []}, "FRANQUICIA": {"mes": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 0.0, "rows": []}, "HQ": {"mes": [69752.13, 49575.24, 73532.54, 30429.25, 36039.77, 30570.94, 72406.93, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 362306.8, "rows": [{"name": "DEVENTS PLATAFORM SCP", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 16604.8, 49814.4, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "GOOGLE IRELAND LIMITED", "metodos": ["Factura", "Tarjeta"], "vector": [10861.0, 5690.42, 9250.1, 3241.0, 0.0, 1462.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "WEBMEFY ESPAÑA, SL", "metodos": ["Factura"], "vector": [4125.0, 4125.0, 4675.0, 4125.0, 4125.0, -550.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "MEDIAPOST SPAIN SL", "metodos": ["Factura"], "vector": [2041.55, 2514.83, 2789.11, 2373.67, 2412.58, 2373.67, 5162.78, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FABRA COMUNICACION SL", "metodos": ["Factura"], "vector": [2400.0, 2400.0, 2400.0, 4800.0, 2400.0, 2400.0, 2400.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TEAM TOP VISUAL S.L.", "metodos": ["Factura"], "vector": [0.0, 513.0, 14985.86, 0.0, 2054.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SMS PUBLI - COMMIFY IBERIA, S.L.", "metodos": ["Factura"], "vector": [1600.82, 1937.01, 1863.65, 1740.12, 0.0, 0.0, 6686.78, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CARVING LABS SAS", "metodos": ["Factura"], "vector": [2300.0, 2300.0, 2300.0, 2300.0, 2300.0, 2300.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "UBERALL GMBH", "metodos": ["Factura"], "vector": [12540.0, 0.0, 0.0, 0.0, 0.0, 280.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CARISMATIC SL ", "metodos": ["Factura"], "vector": [0.0, 0.0, 10800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "GOVENTURE TECHNOLOGIES SL", "metodos": ["Factura"], "vector": [5120.0, 5120.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OLLO ESTUDIO CREATIVO SL", "metodos": ["Factura"], "vector": [2950.0, 3689.97, 0.0, 2265.0, 700.0, 450.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "21NOVA GROWTH SL", "metodos": ["Factura"], "vector": [4541.0, 5484.93, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ABRAHAM E.ESCUDERO AUGUSTO", "metodos": ["Factura", "Tarjeta"], "vector": [800.0, 610.0, 1685.5, 4325.0, 700.0, 0.0, 900.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DOS MODELS SL", "metodos": ["Factura"], "vector": [8766.77, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TEAM VALIENTE SL", "metodos": ["Factura"], "vector": [0.0, 4000.0, 3000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "PRAGMATISTS SP. Z O. O.", "metodos": ["Factura"], "vector": [2027.0, 0.0, 6771.0, 0.0, 0.0, -2027.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Alejandra Dominguez Brito", "metodos": ["Factura"], "vector": [0.0, 0.0, 1200.0, 0.0, 0.0, 0.0, 5250.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Factura pendiente Dani 21/01", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 5149.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ANGELS PRJCT, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 5000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "YOU GLOW AGENCY SL", "metodos": ["Factura"], "vector": [3300.0, 400.0, 1061.04, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "3D CREACIONES", "metodos": ["Factura"], "vector": [0.0, 200.0, 0.0, 0.0, 4195.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ADQUIERE PUBLICIDAD SL", "metodos": ["Factura"], "vector": [0.0, 3439.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "M PILAR LLOMBART DE ARCE", "metodos": ["Factura"], "vector": [3000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ACTIVE CAMPAIGN LLC", "metodos": ["Tarjeta"], "vector": [292.0, 291.5, 397.32, 344.0, 344.0, 344.0, 344.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "5TH AVE MODEL MANAGEMENT, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 2200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Jose Luis Tabueña Acín", "metodos": ["Factura"], "vector": [0.0, 900.0, 0.0, 0.0, 0.0, 1200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Klaviyo LL", "metodos": ["Tarjeta"], "vector": [0.0, 512.7, 524.7, 513.0, 513.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ALEXANDRE ARZA FONQUERNA", "metodos": ["Factura"], "vector": [0.0, 2040.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "LAB MEDIA Y COMUNICACIÓN, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 2033.47, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Klaviyo JLD", "metodos": ["Tarjeta"], "vector": [0.0, 351.7, 359.92, 476.81, 477.0, 359.53, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Cuenta de LOIDA IG", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 2000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "BEATRIZ PASCUAL JIMÉNEZ", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 1965.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DIVINA ESTRATEGIA, S.L.", "metodos": ["Factura"], "vector": [285.0, 344.85, 1140.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Gifting with Reviews", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 1097.16, 299.8, 362.76, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "DAVID MERCHANTE CARRILLO", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 477.0, 1272.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "META PLATFORMS IRELAND LIMITED", "metodos": ["Tarjeta"], "vector": [606.69, 867.55, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SHOPIFY INTERNATIONAL LIMITED", "metodos": ["Tarjeta"], "vector": [107.77, 125.51, 109.99, 412.8, 156.98, 158.45, 159.67, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CRISANTO BLANCO SANCHEZ", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 1200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Videógrafa shooting", "metodos": ["Factura"], "vector": [0.0, 0.0, 1030.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "FERNANDO CASCALES RODRÍGUEZ", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 95.0, 95.0, 279.0, 548.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ALMUDENA CARNICERO", "metodos": ["Factura"], "vector": [0.0, 0.0, 1000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Email marketing y automatización Klaviyo", "metodos": ["Tarjeta"], "vector": [903.2, 0.0, 38.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "COOL FACE ENTERPRISE, S.L.", "metodos": ["Factura"], "vector": [0.0, 0.0, 836.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ESTHER MARTIN SEPULVEDA", "metodos": ["Factura"], "vector": [600.0, 0.0, 0.0, 0.0, 0.0, 0.0, 200.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Agencia grabación de contenido", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 680.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JUAN RAMON DUARTE  FERNANDEZ-MIJARE", "metodos": ["Factura"], "vector": [0.0, 0.0, 630.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "LIDIA HERNÁNDEZ DIÉGUEZ", "metodos": ["Factura"], "vector": [0.0, 600.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "KLAVIYO INC", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 546.07, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JACOBO SUÁREZ MUÑOZ", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 300.0, 200.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "CASONA HOUSE S.L", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 500.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OTILIA SOLUCIONES GASTRÓNOMICAS S.L", "metodos": ["Factura"], "vector": [0.0, 435.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Factura pendiente Dani 09/04", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 431.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "App Influencity (tarjeta Blanca)", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 378.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "THE CREW MGMT 24 SL", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 377.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "JOSE CARLOS LORA SANCHEZ", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 350.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "TYPEFORM, S.L.", "metodos": ["Factura", "Tarjeta"], "vector": [55.0, 55.0, 66.55, 55.0, 55.0, 55.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Make ATC", "metodos": ["Tarjeta"], "vector": [0.0, 98.6, 101.93, 99.52, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "ACKERMAN MARIA AGUSTINA", "metodos": ["Factura"], "vector": [0.0, 300.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "HubSpot CRM", "metodos": ["Tarjeta"], "vector": [0.0, 48.3, 48.3, 48.3, 48.3, 48.3, 48.3, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OVH HISPANO S.L.U.", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 219.46, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "MARTIN SUQUIA MONFORT", "metodos": ["Factura"], "vector": [200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Videografo Feria Sevilla", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Videografo SAN ISIDRO", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 0.0, 200.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "OpenAI", "metodos": ["Tarjeta"], "vector": [59.34, 8.48, 71.0, 55.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Maletin Desayuno LL", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 185.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "WASSABI STEREO SL", "metodos": ["Factura"], "vector": [0.0, 0.0, 150.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Licencia anual Canva", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 107.88, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Azafata accion Llongueras San Isidro", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 100.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Tarjeta regalo modelo cápsula festivales JLD", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Make", "metodos": ["Factura"], "vector": [98.69, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Estilosta produccion Rocio Camacho - wella", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 80.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Linktree", "metodos": ["Tarjeta"], "vector": [13.0, 0.0, 13.0, 13.0, 13.0, 13.0, 13.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Regalo influencers Desayuno LL", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 73.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Uniforme estilista accion San Isidro", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 70.14, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Posicionamiento fichas y reseñas OMC Revi", "metodos": ["Tarjeta"], "vector": [0.0, 60.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Silla Desayuno LL", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 60.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Wazend ATC OMC", "metodos": ["Tarjeta"], "vector": [60.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Wazend OMC ATC", "metodos": ["Factura"], "vector": [0.0, 60.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Licencia Premium Equipo MKT", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 19.01, 19.01, 19.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Estampado camisetas evento Verdeliss", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 56.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Posicionamiento fichas y reseñas", "metodos": ["Factura"], "vector": [50.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Trello Herramienta Gestión Proyectos Abril", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 25.0, 25.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "SALONS DEVELOPMENT", "metodos": ["Tarjeta"], "vector": [48.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Pago Estilista Brunch Llongueras", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 40.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Klaviyo OMC", "metodos": ["Tarjeta"], "vector": [0.0, 38.13, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Camisa chicos", "metodos": ["Factura"], "vector": [0.0, 0.0, 0.0, 29.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Trello Herramienta Gestión Proyectos Mayo", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 25.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Regalo 2 influencers Desayuno LL", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 0.0, 24.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Flores accion San Isidro", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 21.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "App capcut edición videos", "metodos": ["Tarjeta"], "vector": [0.0, 11.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "Materiales accion San Isidro", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 7.96, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"name": "STRATO Hosting Básico", "metodos": ["Tarjeta"], "vector": [0.0, 0.0, 0.0, 0.0, 6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]}, "PROPIOS": {"mes": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "total": 0.0, "rows": []}}};
-const COMPARABLE = ["HQ", "DIST", "BSTORES"];
-const MESES = LED.meses;
-const BUNS = LED.buns;
-const contab = LED.contab;
-const segui = LED.segui;
+const DATA = {"distribucion":{"julio":{"rows":[{"provider":"FERNANDO CASCALES RODRÍGUEZ","contabilidad":86,"seguimiento":86,"diferencia":0},{"provider":"INSTITUCION FERIAL DE MADRID","contabilidad":8600,"seguimiento":8600,"diferencia":0},{"provider":"JESSICA DEL ARBOL JIMENEZ","contabilidad":3875.79,"seguimiento":3875,"diferencia":0.79},{"provider":"PRIVÉ CAFUNÉ, S.L.","contabilidad":413.22,"seguimiento":500,"diferencia":-86.78}],"totals":{"contabilidad":12975.01,"seguimiento":13061,"diferencia":-85.99}},"agosto":null},"hq":{"julio":{"rows":[{"provider":"ABRAHAM E.ESCUDERO AUGUSTO","contabilidad":1510,"seguimiento":1780,"diferencia":-270,"division":"BRAND"},{"provider":"ALVARO VALENTIN ROMERO","contabilidad":680,"seguimiento":680,"diferencia":0,"division":"BRAND"},{"provider":"Alejandra Dominguez Brito","contabilidad":5250,"seguimiento":5250,"diferencia":0,"division":"BRAND"},{"provider":"CARVING LABS SAS","contabilidad":2300,"seguimiento":2300,"diferencia":0,"division":"DIGITAL"},{"provider":"CASONA HOUSE S.L","contabilidad":500,"seguimiento":500,"diferencia":0,"division":"BRAND"},{"provider":"DEVENTS PLATAFORM SCP","contabilidad":49814.4,"seguimiento":49814.4,"diferencia":0,"division":"BRAND"},{"provider":"ESTHER MARTIN SEPULVEDA","contabilidad":200,"seguimiento":200,"diferencia":0,"division":"BRAND"},{"provider":"FABRA COMUNICACION SL","contabilidad":4800,"seguimiento":4800,"diferencia":0,"division":"BRAND"},{"provider":"FERNANDO CASCALES RODRÍGUEZ","contabilidad":548,"seguimiento":548,"diferencia":0,"division":"BRAND"},{"provider":"GOVENTURE TECHNOLOGIES SL","contabilidad":2038,"seguimiento":2038.4,"diferencia":-0.4,"division":"DIGITAL"},{"provider":"JACOBO SUÁREZ MUÑOZ","contabilidad":200,"seguimiento":200,"diferencia":0,"division":"BRAND"},{"provider":"MEDIAPOST SPAIN SL","contabilidad":5162.78,"seguimiento":5162.78,"diferencia":0,"division":"DIGITAL"},{"provider":"OVH HISPANO S.L.U.","contabilidad":13.49,"seguimiento":0,"diferencia":13.49,"division":"OTROS"},{"provider":"PINTO INVESTMENTS, S.L.","contabilidad":5000,"seguimiento":5000,"diferencia":0,"division":"DIGITAL"},{"provider":"SHOPIFY INTERNATIONAL LIMITED","contabilidad":165.06,"seguimiento":159.67,"diferencia":5.39,"division":"DIGITAL"},{"provider":"SMS PUBLI - COMMIFY IBERIA, S.L.","contabilidad":6042.27,"seguimiento":6041.45,"diferencia":0.82,"division":"DIGITAL"},{"provider":"TARJETA","contabilidad":621.69,"seguimiento":837,"diferencia":-215.31,"division":"OTROS"}],"totals":{"contabilidad":84845.69,"seguimiento":85311.7,"diferencia":-466.01}},"agosto":{"rows":[{"provider":"DANIELA FAJARDO","contabilidad":2000,"seguimiento":2000,"diferencia":0,"division":"BRAND"},{"provider":"FABRA COMUNICACION SL","contabilidad":2400,"seguimiento":2400,"diferencia":0,"division":"BRAND"},{"provider":"GOVENTURE TECHNOLOGIES SL","contabilidad":2038,"seguimiento":2038.4,"diferencia":-0.4,"division":"DIGITAL"},{"provider":"HOLA, SL","contabilidad":12600,"seguimiento":12600,"diferencia":0,"division":"BRAND"},{"provider":"MIRIAM ALIA, S.L.","contabilidad":800,"seguimiento":800,"diferencia":0,"division":"BRAND"},{"provider":"PINTO INVESTMENTS, S.L.","contabilidad":5000,"seguimiento":5000,"diferencia":0,"division":"DIGITAL"},{"provider":"SMS PUBLI - COMMIFY IBERIA, S.L.","contabilidad":2291,"seguimiento":2290.6,"diferencia":0.4,"division":"DIGITAL"},{"provider":"TARJETA","contabilidad":480,"seguimiento":747.65,"diferencia":0,"division":"OTROS"},{"provider":"THE TRIBE MANAGEMENT S.L.","contabilidad":2160,"seguimiento":0,"diferencia":2160,"division":"OTROS"},{"provider":"UBERALL GMBH","contabilidad":8048,"seguimiento":8048,"diferencia":0,"division":"DIGITAL"},{"provider":"UNIFORMES GARYS","contabilidad":29.9,"seguimiento":0,"diferencia":29.9,"division":"OTROS"}],"totals":{"contabilidad":37846.9,"seguimiento":35924.65,"diferencia":2189.9}}},"tarjeta":{"julio":{"rows":[{"fecha":"2026-07-30","concepto":"FACEBK *S3D6XUZFA2","tipo":"Compra","importe":-20,"divisa":"EUR"},{"fecha":"2026-07-30","concepto":"FACEBK *MRQCF2JMM4","tipo":"Compra","importe":-20,"divisa":"EUR"},{"fecha":"2026-07-30","concepto":"FACEBK *36R29WVFA2","tipo":"Compra","importe":-20,"divisa":"EUR"},{"fecha":"2026-07-30","concepto":"FACEBK *DSK53ZDMM2","tipo":"Compra","importe":-20,"divisa":"EUR"},{"fecha":"2026-07-27","concepto":"SHOPIFY* 554136245","tipo":"Compra","importe":-21.16,"divisa":"EUR"},{"fecha":"2026-07-22","concepto":"TRELLO.COM* ATLASSIAN","tipo":"Compra","importe":-22.6,"divisa":"EUR"},{"fecha":"2026-07-15","concepto":"Zara.com","tipo":"Compra","importe":-100,"divisa":"EUR"},{"fecha":"2026-07-12","concepto":"SHOPIFY* 557024399","tipo":"Compra","importe":-17.84,"divisa":"EUR"},{"fecha":"2026-07-12","concepto":"ANTHROPIC* CLAUDE SUB","tipo":"Compra","importe":-21.78,"divisa":"EUR"},{"fecha":"2026-07-11","concepto":"SHOPIFY* 554636213","tipo":"Compra","importe":-43.33,"divisa":"EUR"},{"fecha":"2026-07-09","concepto":"SHOPIFY* 555657835","tipo":"Compra","importe":-80.48,"divisa":"EUR"},{"fecha":"2026-07-06","concepto":"LA CASA DEL ABUELO BSA","tipo":"Compra","importe":-124.5,"divisa":"EUR"},{"fecha":"2026-07-06","concepto":"EL CORTE INGLES-DEPARTAM.","tipo":"Compra","importe":-30,"divisa":"EUR"},{"fecha":"2026-07-06","concepto":"Zara.com","tipo":"Compra","importe":-80,"divisa":"EUR"}],"total":-621.69},"agosto":{"rows":[{"fecha":"2026-08-21","concepto":"TRELLO.COM* ATLASSIAN","tipo":"Compra","importe":-22.07,"divisa":"EUR"},{"fecha":"2026-08-20","concepto":"ActiveCampaign","tipo":"Compra","importe":-306.29,"divisa":"EUR"},{"fecha":"2026-08-12","concepto":"ANTHROPIC* CLAUDE SUB","tipo":"Compra","importe":-21.78,"divisa":"EUR"},{"fecha":"2026-08-07","concepto":"SHOPIFY* 569512965","tipo":"Compra","importe":-42.94,"divisa":"EUR"},{"fecha":"2026-08-06","concepto":"SHOPIFY* 569010864","tipo":"Compra","importe":-21.27,"divisa":"EUR"},{"fecha":"2026-08-03","concepto":"ActiveCampaign","tipo":"Compra","importe":-309.37,"divisa":"EUR"},{"fecha":"2026-08-01","concepto":"FACEBK *ZQJ6MZHMM2","tipo":"Compra","importe":-4.48,"divisa":"EUR"},{"fecha":"2026-08-01","concepto":"FACEBK *FZMQMUDFA2","tipo":"Compra","importe":-19.45,"divisa":"EUR"}],"total":-747.65}}};
 
-const pillMap = {HQ:'pill-hq', DIST:'pill-dist', BSTORES:'pill-bs', B2CECOMM:'pill-b2c', B2BECOMM:'pill-b2c', PROPIOS:'pill-other', FRANQUICIA:'pill-other', EDUCACION:'pill-other'};
-function pillFor(bu){ return pillMap[bu] || 'pill-other'; }
-function labelFor(bu){ const b = BUNS.find(x=>x.code===bu); return b ? b.label : bu; }
-const metodoPillMap = {Factura:'pill-factura', Tarjeta:'pill-tarjeta', Otros:'pill-otros'};
-function metodoPills(metodos){
-  if (!metodos) return '';
-  const arr = Array.isArray(metodos) ? metodos : [metodos];
-  return arr.map(m=>`<span class="metodo-pill ${metodoPillMap[m]||'pill-otros'}">${m}</span>`).join(' ');
+const MONTH_LABEL = {julio:'Julio 2026', agosto:'Agosto 2026'};
+const DIV_LABEL = {BRAND:'Brand', DIGITAL:'Digital', OTROS:'Otros'};
+const DIV_PILL = {BRAND:'pill-brand', DIGITAL:'pill-digital', OTROS:'pill-otros'};
+
+let state = { tab: 'distribucion', month: 'julio', division: 'ALL' };
+
+function fmtEUR(n){
+  const v = Number(n)||0;
+  return new Intl.NumberFormat('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2}).format(v) + ' €';
+}
+function diffClass(n){ return Math.abs(n) < 0.01 ? 'ok' : 'bad'; }
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function kpiHTML(cards){
+  return cards.map(c => `
+    <div class="kpi${c.highlight?' highlight':''}">
+      <div class="kpi-label">${c.label}</div>
+      <div class="kpi-value${c.cls?(' '+c.cls):''}">${c.value}</div>
+      ${c.sub?`<div class="kpi-sub">${c.sub}</div>`:''}
+    </div>`).join('');
 }
 
-const fmt = v => { if (v===null||v===undefined) return '—'; const a=Math.abs(v); const s=v<0?'−':''; return s+'€'+Math.round(a).toLocaleString('es-ES'); };
-const fmtK = v => { const a=Math.abs(v); const s=v<0?'−':''; const n = a>=10000 ? (Math.round(a/100)/10)+'k' : Math.round(a).toLocaleString('es-ES'); return s+'€'+n; };
-const dFmt = v => (v>0?'+':'') + Math.round(v).toLocaleString('es-ES') + '€';
-const dCls = v => v>=0 ? 'pos' : 'neg';
-const pct = (a,b) => b ? Math.round(a/b*100) : null;
-
-function vecSum(vec, mesIdx){ return mesIdx===null ? vec.reduce((a,b)=>a+b,0) : (vec[mesIdx]||0); }
-
-/* ---------- populate filters ---------- */
-const buSel = document.getElementById('buFilter');
-BUNS.forEach(b=>{ const o=document.createElement('option'); o.value=b.code; o.textContent=b.label; buSel.appendChild(o); });
-const mesSel = document.getElementById('monthFilter');
-MESES.forEach((m,i)=>{ const o=document.createElement('option'); o.value=String(i+1); o.textContent=m; mesSel.appendChild(o); });
-
-/* ---------- aggregate helpers ---------- */
-function ctTotal(bu, mesIdx){
-  const d = contab[bu]; if(!d) return 0;
-  return mesIdx===null ? d.total : (d.mes[mesIdx]||0);
-}
-function ctAllTotal(mesIdx){
-  return BUNS.reduce((s,b)=> s + ctTotal(b.code, mesIdx), 0);
-}
-function segTotal(bu, mesIdx){
-  const d = segui[bu]; if(!d) return 0;
-  return mesIdx===null ? d.total : (d.mes[mesIdx]||0);
-}
-function segAllTotal(mesIdx){
-  return COMPARABLE.reduce((s,bu)=> s + segTotal(bu, mesIdx), 0);
-}
-
-/* ---------- KPI strip ---------- */
-function renderKPIs(elId, bu, mesIdx){
-  const ct = bu==='ALL' ? ctAllTotal(mesIdx) : ctTotal(bu, mesIdx);
-  const segAvail = bu==='ALL' || COMPARABLE.includes(bu);
-  const seg = bu==='ALL' ? segAllTotal(mesIdx) : (COMPARABLE.includes(bu) ? segTotal(bu, mesIdx) : null);
-  const periodo = mesIdx===null ? 'YTD Ene–Jul' : MESES[mesIdx];
-  let html = `<div class="kpi highlight"><div class="kpi-label">Contabilidad · ${periodo}</div><div class="kpi-value">${fmtK(ct)}</div><div class="kpi-sub">Facturas + tarjeta registradas</div></div>`;
-  html += `<div class="kpi"><div class="kpi-label">Previsto Marketing · ${periodo}</div><div class="kpi-value">${seg!==null?fmtK(seg):'—'}</div><div class="kpi-sub">${segAvail?'Reportado en plantilla':'BU sin dato de Marketing'}</div></div>`;
-  if (seg!==null){
-    const gap = seg-ct;
-    html += `<div class="kpi"><div class="kpi-label">Diferencia Previsto − Contab.</div><div class="kpi-value ${dCls(gap)}" style="font-size:20px">${dFmt(gap)}</div><div class="kpi-sub"><span class="tag ${dCls(gap)==='pos'?'tag-neg':'tag-pos'}">${pct(gap,ct)!==null?pct(gap,ct)+'%':'—'} vs contab.</span></div></div>`;
-  } else {
-    html += `<div class="kpi pending"><div class="kpi-label">Diferencia Previsto − Contab.</div><div class="kpi-value">Sin dato</div><div class="kpi-sub">Marketing no reporta esta BU</div></div>`;
-  }
-  html += `<div class="kpi pending"><div class="kpi-label">Presupuesto</div><div class="kpi-value">Pendiente</div><div class="kpi-sub">Se activará al recibir el fichero</div></div>`;
-  document.getElementById(elId).innerHTML = html;
-}
-
-/* ---------- RESUMEN tab ---------- */
-function renderResumen(bu, mesIdx){
-  const bus = bu==='ALL' ? BUNS.map(b=>b.code) : [bu];
-  const tbody = document.getElementById('tbody-resumen');
-  tbody.innerHTML = '';
-  let tCt=0, tSeg=0, anySeg=false;
-  bus.forEach(b=>{
-    const ct = ctTotal(b, mesIdx);
-    const hasSeg = COMPARABLE.includes(b);
-    const seg = hasSeg ? segTotal(b, mesIdx) : null;
-    tCt += ct;
-    if (hasSeg){ tSeg += seg; anySeg = true; }
-    const diff = hasSeg ? seg-ct : null;
-    tbody.innerHTML += `<tr class="clickable" onclick="drillResumen('${b}')">
-      <td><span class="bu-pill ${pillFor(b)}">${labelFor(b)}</span></td>
-      <td class="num">${fmt(ct)}</td>
-      <td class="num ${hasSeg?'':'dim'}">${hasSeg?fmt(seg):'—'}</td>
-      <td class="num ${hasSeg?dCls(diff):''}">${hasSeg?dFmt(diff):'—'}</td>
-      <td class="num">${hasSeg?`<span class="tag ${dCls(diff)==='pos'?'tag-neg':'tag-pos'}">${pct(diff,ct)!==null?pct(diff,ct)+'%':'—'}</span>`:'—'}</td>
+function comparisonTable(rows, totals, opts){
+  opts = opts || {};
+  const showDiv = !!opts.showDivision;
+  const sorted = rows.slice().sort((a,b) => Math.abs(b.diferencia) - Math.abs(a.diferencia) || a.provider.localeCompare(b.provider));
+  let html = `<div class="table-wrap"><table><thead><tr>
+    <th>Proveedor</th>${showDiv?'<th>División</th>':''}
+    <th class="num">Seguimiento</th><th class="num">Contabilidad</th><th class="num">Diferencia</th>
+  </tr></thead><tbody>`;
+  for(const r of sorted){
+    const dc = diffClass(r.diferencia);
+    html += `<tr>
+      <td>${esc(r.provider)}</td>
+      ${showDiv?`<td><span class="pill ${DIV_PILL[r.division]||'pill-otros'}">${DIV_LABEL[r.division]||r.division}</span></td>`:''}
+      <td class="num">${fmtEUR(r.seguimiento)}</td>
+      <td class="num">${fmtEUR(r.contabilidad)}</td>
+      <td class="num ${dc}">${r.diferencia>0?'+':''}${fmtEUR(r.diferencia)}</td>
     </tr>`;
-  });
-  if (bus.length>1){
-    const totDiff = anySeg ? tSeg-tCt : null;
-    tbody.innerHTML += `<tr class="row-total"><td>Total</td><td class="num">${fmt(tCt)}</td><td class="num">${anySeg?fmt(tSeg):'—'}</td><td class="num ${anySeg?dCls(totDiff):''}">${anySeg?dFmt(totDiff):'—'}</td><td class="num">${anySeg?`${pct(totDiff,tCt)}%`:'—'}</td></tr>`;
   }
+  html += `<tr class="row-total">
+    <td colspan="${showDiv?2:1}">Total (${rows.length} proveedor${rows.length===1?'':'es'})</td>
+    <td class="num">${fmtEUR(totals.seguimiento)}</td>
+    <td class="num">${fmtEUR(totals.contabilidad)}</td>
+    <td class="num ${diffClass(totals.diferencia)}">${totals.diferencia>0?'+':''}${fmtEUR(totals.diferencia)}</td>
+  </tr>`;
+  html += `</tbody></table></div>`;
+  return html;
 }
-function drillResumen(bu){
-  const d = contab[bu];
-  if (!d){ closeDrill('drill-resumen'); return; }
-  document.getElementById('drill-resumen-title').textContent = 'Detalle proveedores — ' + labelFor(bu);
-  const thead = document.getElementById('drill-resumen-thead');
-  thead.innerHTML = '<th>Proveedor</th><th>Método</th>' + MESES.map(m=>`<th class="num">${m}</th>`).join('') + '<th class="num">Total</th>';
-  const tbody = document.getElementById('drill-resumen-body');
-  tbody.innerHTML = '';
-  const entries = [...d.rows].sort((a,b)=>Math.abs(b.vector.reduce((s,v)=>s+v,0)) - Math.abs(a.vector.reduce((s,v)=>s+v,0)));
-  let tots = new Array(MESES.length).fill(0);
-  entries.forEach(({name, metodos, vector})=>{
-    const tot = vector.reduce((s,v)=>s+v,0);
-    if (Math.abs(tot)<0.01) return;
-    vector.forEach((v,i)=>tots[i]+=v);
-    tbody.innerHTML += `<tr><td>${name}</td><td>${metodoPills(metodos)}</td>${vector.map(v=>`<td class="num ${v<0?'neg':''}">${v!==0?fmt(v):'-'}</td>`).join('')}<td class="num" style="font-weight:500">${fmt(tot)}</td></tr>`;
-  });
-  tbody.innerHTML += `<tr class="row-total"><td>Total ${labelFor(bu)}</td><td></td>${tots.map(v=>`<td class="num">${fmt(v)}</td>`).join('')}<td class="num">${fmt(tots.reduce((s,v)=>s+v,0))}</td></tr>`;
-  const p = document.getElementById('drill-resumen');
-  p.classList.add('open');
-  p.scrollIntoView({behavior:'smooth', block:'nearest'});
-}
-function closeDrill(id){ document.getElementById(id).classList.remove('open'); }
 
-/* ---------- EVOLUCIÓN MENSUAL tab ---------- */
-function renderMensual(bu){
-  const bus = bu==='ALL' ? COMPARABLE : (COMPARABLE.includes(bu) ? [bu] : []);
-  const thead = document.getElementById('mensual-thead');
-  const tbody = document.getElementById('tbody-mensual');
-  document.getElementById('mensual-hint').textContent = bus.length===0 ? 'Esta BU no tiene dato de Marketing' : '';
-  if (bus.length===0){
-    thead.innerHTML = '<th>Mes</th><th class="num">Contabilidad</th>';
-    tbody.innerHTML = MESES.map((m,i)=>`<tr><td>${m}</td><td class="num">${fmt(ctTotal(bu,i))}</td></tr>`).join('')
-      + `<tr class="row-total"><td>Total YTD</td><td class="num">${fmt(ctTotal(bu,null))}</td></tr>`;
+function emptyState(msg){
+  return `<div class="empty-state"><div class="big">Sin datos</div><p>${msg}</p></div>`;
+}
+
+function renderDistribucion(){
+  const data = DATA.distribucion[state.month];
+  const hint = document.getElementById('dist-hint');
+  hint.textContent = MONTH_LABEL[state.month] + ' · Comparativa por proveedor';
+  const body = document.getElementById('dist-body');
+  const kpis = document.getElementById('dist-kpis');
+  if(!data){
+    body.innerHTML = emptyState('Todavía no se ha recibido el fichero de seguimiento de Distribución para ' + MONTH_LABEL[state.month] + '.');
+    kpis.innerHTML = '';
     return;
   }
-  let head = '<th>Mes</th>';
-  bus.forEach(b=> head += `<th class="num">${labelFor(b)} Contab.</th><th class="num">${labelFor(b)} Previsto</th><th class="num">Dif.</th>`);
-  head += '<th class="num">Total Contab.</th><th class="num">Total Previsto</th><th class="num">Dif. Total</th>';
-  thead.innerHTML = head;
-
-  tbody.innerHTML = '';
-  let totals = {}; bus.forEach(b=> totals[b]={ct:0,seg:0});
-  let grandCt=0, grandSeg=0;
-  MESES.forEach((m,i)=>{
-    let row = `<td style="font-weight:500">${m}</td>`;
-    let rowCt=0, rowSeg=0;
-    bus.forEach(b=>{
-      const ct = ctTotal(b,i), seg = segTotal(b,i);
-      totals[b].ct += ct; totals[b].seg += seg;
-      rowCt += ct; rowSeg += seg;
-      row += `<td class="num">${fmt(ct)}</td><td class="num dim">${fmt(seg)}</td><td class="num ${dCls(seg-ct)}">${dFmt(seg-ct)}</td>`;
-    });
-    grandCt += rowCt; grandSeg += rowSeg;
-    row += `<td class="num" style="font-weight:500">${fmt(rowCt)}</td><td class="num" style="font-weight:500">${fmt(rowSeg)}</td><td class="num ${dCls(rowSeg-rowCt)}">${dFmt(rowSeg-rowCt)}</td>`;
-    tbody.innerHTML += `<tr>${row}</tr>`;
-  });
-  let footer = '<td>Total YTD</td>';
-  bus.forEach(b=> footer += `<td class="num">${fmt(totals[b].ct)}</td><td class="num">${fmt(totals[b].seg)}</td><td class="num ${dCls(totals[b].seg-totals[b].ct)}">${dFmt(totals[b].seg-totals[b].ct)}</td>`);
-  footer += `<td class="num">${fmt(grandCt)}</td><td class="num">${fmt(grandSeg)}</td><td class="num ${dCls(grandSeg-grandCt)}">${dFmt(grandSeg-grandCt)}</td>`;
-  tbody.innerHTML += `<tr class="row-total-grand">${footer}</tr>`;
+  kpis.innerHTML = kpiHTML([
+    {label:'Seguimiento', value: fmtEUR(data.totals.seguimiento)},
+    {label:'Contabilidad', value: fmtEUR(data.totals.contabilidad)},
+    {label:'Diferencia', value: (data.totals.diferencia>0?'+':'')+fmtEUR(data.totals.diferencia), cls: diffClass(data.totals.diferencia)},
+    {label:'Proveedores', value: data.rows.length, highlight:true},
+  ]);
+  body.innerHTML = comparisonTable(data.rows, data.totals, {showDivision:false});
 }
 
-/* ---------- CONTABILIDAD tab ---------- */
-function renderContabilidad(){
-  const bu = document.getElementById('buFilter').value;
-  const mesVal = document.getElementById('monthFilter').value;
-  const mesIdx = mesVal==='ALL' ? null : parseInt(mesVal)-1;
-  const bus = bu==='ALL' ? BUNS.map(b=>b.code) : [bu];
-  const thead = document.getElementById('contab-thead-row');
-  const tbody = document.getElementById('tbody-contabilidad');
-  const rows = [];
-  bus.forEach(b=>{
-    const d = contab[b]; if(!d) return;
-    d.rows.forEach(({name, metodos, vector})=>{
-      const val = mesIdx!==null ? vector[mesIdx] : vector.reduce((s,x)=>s+x,0);
-      if (Math.abs(val)>0.01) rows.push({bu:b, n:name, metodos, v:vector, val});
-    });
-  });
-  rows.sort((a,b)=>Math.abs(b.val)-Math.abs(a.val));
-  tbody.innerHTML = '';
-  if (mesIdx!==null){
-    thead.innerHTML = `<th>Tercero</th><th>BU</th><th>Método</th><th class="num">${MESES[mesIdx]}</th>`;
-    rows.forEach(({bu,n,metodos,v,val})=>{
-      tbody.innerHTML += `<tr class="clickable" onclick='drillContab(${JSON.stringify(n)},${JSON.stringify(metodos)},${JSON.stringify(v)})'><td>${n}</td><td><span class="bu-pill ${pillFor(bu)}">${labelFor(bu)}</span></td><td>${metodoPills(metodos)}</td><td class="num ${val<0?'neg':''}" style="font-weight:500">${fmt(val)}</td></tr>`;
-    });
-    tbody.innerHTML += `<tr class="row-total-grand"><td>Total ${MESES[mesIdx]}</td><td></td><td></td><td class="num">${fmt(rows.reduce((s,r)=>s+r.val,0))}</td></tr>`;
-  } else {
-    thead.innerHTML = '<th>Tercero</th><th>BU</th><th>Método</th>' + MESES.map(m=>`<th class="num">${m}</th>`).join('') + '<th class="num">Total YTD</th>';
-    const tots = new Array(MESES.length).fill(0);
-    let tGen = 0;
-    rows.forEach(({bu,n,metodos,v,val})=>{
-      v.forEach((x,i)=>tots[i]+=x);
-      tGen += val;
-      tbody.innerHTML += `<tr class="clickable" onclick='drillContab(${JSON.stringify(n)},${JSON.stringify(metodos)},${JSON.stringify(v)})'><td>${n}</td><td><span class="bu-pill ${pillFor(bu)}">${labelFor(bu)}</span></td><td>${metodoPills(metodos)}</td>${v.map(x=>`<td class="num ${x<0?'neg':''}">${x!==0?fmt(x):'-'}</td>`).join('')}<td class="num" style="font-weight:500">${fmt(val)}</td></tr>`;
-    });
-    tbody.innerHTML += `<tr class="row-total-grand"><td>Total</td><td></td><td></td>${tots.map(v=>`<td class="num">${fmt(v)}</td>`).join('')}<td class="num">${fmt(tGen)}</td></tr>`;
-  }
-}
-function drillContab(name, metodos, vals){
-  document.getElementById('drill-contab-title').textContent = name + ' · ' + (Array.isArray(metodos)?metodos.join(' + '):metodos);
-  const tbody = document.getElementById('drill-contab-body');
-  tbody.innerHTML = '';
-  let acum = 0;
-  vals.forEach((v,i)=>{
-    acum += v;
-    tbody.innerHTML += `<tr><td>${MESES[i]}</td><td class="num ${v<0?'neg':''}">${v!==0?fmt(v):'-'}</td><td class="num" style="color:var(--gold)">${fmt(acum)}</td></tr>`;
-  });
-  tbody.innerHTML += `<tr class="row-total"><td>Total</td><td class="num">${fmt(vals.reduce((s,v)=>s+v,0))}</td><td></td></tr>`;
-  const p = document.getElementById('drill-contab');
-  p.classList.add('open');
-  p.scrollIntoView({behavior:'smooth', block:'nearest'});
-}
-
-/* ---------- DIFERENCIAS tab ---------- */
-function renderDiferencias(){
-  const buF = document.getElementById('buFilter').value;
-  const mesVal = document.getElementById('monthFilter').value;
-  const mesIdx = mesVal==='ALL' ? null : parseInt(mesVal)-1;
-  const buList = buF==='ALL' ? COMPARABLE : (COMPARABLE.includes(buF) ? [buF] : []);
-  const tbody = document.getElementById('tbody-diferencias');
-  tbody.innerHTML = '';
-  if (buList.length===0){
-    tbody.innerHTML = '<tr><td colspan="7" class="dim">Esta unidad de negocio no tiene dato de Marketing todavía.</td></tr>';
+function renderHQ(){
+  const data = DATA.hq[state.month];
+  const hint = document.getElementById('hq-hint');
+  const note = document.getElementById('hq-note');
+  const body = document.getElementById('hq-body');
+  const kpis = document.getElementById('hq-kpis');
+  if(!data){
+    hint.textContent = MONTH_LABEL[state.month];
+    body.innerHTML = emptyState('Todavía no se ha recibido el fichero de seguimiento de HQ para ' + MONTH_LABEL[state.month] + '.');
+    kpis.innerHTML = '';
+    note.hidden = true;
     return;
   }
+  let rows = data.rows;
+  if(state.division !== 'ALL'){
+    rows = rows.filter(r => r.division === state.division);
+  }
+  const totals = rows.reduce((acc,r) => ({
+    seguimiento: acc.seguimiento + r.seguimiento,
+    contabilidad: acc.contabilidad + r.contabilidad,
+    diferencia: acc.diferencia + r.diferencia,
+  }), {seguimiento:0, contabilidad:0, diferencia:0});
 
-  const all = [];
-  buList.forEach(bu=>{
-    const ctRows = (contab[bu]||{rows:[]}).rows;
-    const segRows = (segui[bu]||{rows:[]}).rows;
-    const ctMap = new Map(ctRows.map(r=>[r.name, r]));
-    const segMap = new Map(segRows.map(r=>[r.name, r]));
-    const allNames = new Set([...ctMap.keys(), ...segMap.keys()]);
-    allNames.forEach(name=>{
-      const ctRow = ctMap.get(name), segRow = segMap.get(name);
-      const ctVec = ctRow ? ctRow.vector : new Array(MESES.length).fill(0);
-      const segVec = segRow ? segRow.vector : new Array(MESES.length).fill(0);
-      const ctVal = mesIdx!==null ? ctVec[mesIdx] : ctVec.reduce((s,v)=>s+v,0);
-      const segVal = mesIdx!==null ? segVec[mesIdx] : segVec.reduce((s,v)=>s+v,0);
-      if (Math.abs(ctVal)<0.01 && Math.abs(segVal)<0.01) return;
-      const metodos = ctRow ? ctRow.metodos : (segRow ? segRow.metodos : []);
-      let estado, estadoClass;
-      if (ctRow && segRow){ estado='Coincide'; estadoClass='tag-pos'; }
-      else if (ctRow){ estado='Sólo contab.'; estadoClass='tag-neg'; }
-      else { estado='Sólo Marketing'; estadoClass='tag-neu'; }
-      all.push({bu, name, metodos, ctVec, segVec, ctVal, segVal, estado, estadoClass});
-    });
-  });
-  all.sort((a,b)=>Math.abs((b.segVal-b.ctVal)) - Math.abs((a.segVal-a.ctVal)));
-
-  let tCt=0, tSeg=0;
-  all.forEach(r=>{
-    const diff = r.segVal - r.ctVal;
-    tCt += r.ctVal; tSeg += r.segVal;
-    const ctCell = r.ctVal!==0 || r.metodos.length ? fmt(r.ctVal) : '—';
-    tbody.innerHTML += `<tr class="clickable" onclick='drillDiff(${JSON.stringify(r.name)},${JSON.stringify(r.metodos)},${JSON.stringify(r.ctVec)},${JSON.stringify(r.segVec)})'>
-      <td>${r.name}</td><td><span class="bu-pill ${pillFor(r.bu)}">${labelFor(r.bu)}</span></td><td>${metodoPills(r.metodos)}</td>
-      <td class="num ${r.ctVal===0?'dim':''}">${r.ctVal!==0?fmt(r.ctVal):'—'}</td>
-      <td class="num ${r.segVal===0?'dim':''}">${r.segVal!==0?fmt(r.segVal):'—'}</td>
-      <td class="num ${dCls(diff)}">${dFmt(diff)}</td><td><span class="tag ${r.estadoClass}">${r.estado}</span></td></tr>`;
-  });
-  const totDiff = tSeg-tCt;
-  tbody.innerHTML += `<tr class="row-total-grand"><td colspan="3">Total general</td><td class="num">${fmt(tCt)}</td><td class="num">${fmt(tSeg)}</td><td class="num ${dCls(totDiff)}">${dFmt(totDiff)}</td><td></td></tr>`;
-}
-function drillDiff(name, metodos, ctVec, segVec){
-  document.getElementById('drill-diff-title').textContent = 'Detalle: ' + name + ' · ' + (Array.isArray(metodos)?metodos.join(' + '):metodos);
-  const tbody = document.getElementById('drill-diff-body');
-  tbody.innerHTML = '';
-  MESES.forEach((m,i)=>{
-    const ct = ctVec[i]||0, seg = segVec[i]||0, diff = seg-ct;
-    tbody.innerHTML += `<tr><td>${m}</td><td class="num ${ct<0?'neg':''}">${ct!==0?fmt(ct):'-'}</td><td class="num ${seg<0?'neg':''}">${seg!==0?fmt(seg):'-'}</td><td class="num ${diff!==0?dCls(diff):''}">${diff!==0?dFmt(diff):'-'}</td></tr>`;
-  });
-  const tC = ctVec.reduce((s,v)=>s+v,0), tS = segVec.reduce((s,v)=>s+v,0);
-  tbody.innerHTML += `<tr class="row-total"><td>Total</td><td class="num">${fmt(tC)}</td><td class="num">${fmt(tS)}</td><td class="num ${dCls(tS-tC)}">${dFmt(tS-tC)}</td></tr>`;
-  const p = document.getElementById('drill-diff');
-  p.classList.add('open');
-  p.scrollIntoView({behavior:'smooth', block:'nearest'});
+  hint.textContent = MONTH_LABEL[state.month] + (state.division==='ALL' ? ' · Todas las divisiones' : ' · ' + DIV_LABEL[state.division]);
+  kpis.innerHTML = kpiHTML([
+    {label:'Seguimiento', value: fmtEUR(totals.seguimiento)},
+    {label:'Contabilidad', value: fmtEUR(totals.contabilidad)},
+    {label:'Diferencia', value: (totals.diferencia>0?'+':'')+fmtEUR(totals.diferencia), cls: diffClass(totals.diferencia)},
+    {label:'Proveedores', value: rows.length, highlight:true},
+  ]);
+  body.innerHTML = rows.length ? comparisonTable(rows, totals, {showDivision: state.division==='ALL'}) : emptyState('No hay proveedores para este filtro.');
+  note.hidden = !(state.division === 'ALL' && data.rows.some(r => r.division === 'OTROS'));
 }
 
-/* ---------- tabs / master render ---------- */
-let currentTab = 'resumen';
-function switchTab(tab, el){
-  currentTab = tab;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  ['resumen','mensual','contabilidad','diferencias'].forEach(t=> document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none');
-  ['drill-resumen','drill-contab','drill-diff'].forEach(id=>closeDrill(id));
-  render();
+function renderTarjeta(){
+  const data = DATA.tarjeta[state.month];
+  const hint = document.getElementById('tar-hint');
+  const body = document.getElementById('tar-body');
+  const kpis = document.getElementById('tar-kpis');
+  if(!data){
+    hint.textContent = MONTH_LABEL[state.month];
+    body.innerHTML = emptyState('Todavía no se ha recibido el extracto de tarjeta para ' + MONTH_LABEL[state.month] + '.');
+    kpis.innerHTML = '';
+    return;
+  }
+  hint.textContent = MONTH_LABEL[state.month] + ' · Extracto de movimientos';
+  const n = data.rows.length;
+  const avg = n ? data.total / n : 0;
+  kpis.innerHTML = kpiHTML([
+    {label:'Total gasto', value: fmtEUR(data.total)},
+    {label:'Movimientos', value: n, highlight:true},
+    {label:'Ticket medio', value: fmtEUR(avg)},
+  ]);
+  let html = `<div class="table-wrap"><table><thead><tr>
+    <th>Fecha operación</th><th>Concepto</th><th>Tipo movimiento</th><th class="num">Importe</th><th>Divisa</th>
+  </tr></thead><tbody>`;
+  for(const r of data.rows){
+    html += `<tr>
+      <td>${esc(r.fecha)}</td>
+      <td>${esc(r.concepto)}</td>
+      <td><span class="pill pill-tarjeta">${esc(r.tipo)}</span></td>
+      <td class="num ${r.importe<0?'bad':'ok'}">${fmtEUR(r.importe)}</td>
+      <td class="dim">${esc(r.divisa)}</td>
+    </tr>`;
+  }
+  html += `<tr class="row-total"><td colspan="3">Total (${n} movimientos)</td><td class="num">${fmtEUR(data.total)}</td><td></td></tr>`;
+  html += `</tbody></table></div>`;
+  body.innerHTML = html;
 }
-function render(){
-  const bu = document.getElementById('buFilter').value;
-  const mesVal = document.getElementById('monthFilter').value;
-  const mesIdx = mesVal==='ALL' ? null : parseInt(mesVal)-1;
-  if (currentTab==='resumen'){ renderKPIs('kpi-cards', bu, mesIdx); renderResumen(bu, mesIdx); }
-  if (currentTab==='mensual'){ renderKPIs('kpi-cards-m', bu, null); renderMensual(bu); }
-  if (currentTab==='contabilidad'){ renderKPIs('kpi-cards-c', bu, mesIdx); renderContabilidad(); }
-  if (currentTab==='diferencias'){ renderKPIs('kpi-cards-d', bu, mesIdx); renderDiferencias(); }
+
+function renderAll(){
+  renderDistribucion();
+  renderHQ();
+  renderTarjeta();
 }
-render();
+
+function switchTab(tab){
+  state.tab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.querySelectorAll('.tabpanel').forEach(p => p.hidden = true);
+  document.getElementById('tab-'+tab).hidden = false;
+}
+
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+document.getElementById('monthFilter').addEventListener('change', (e) => { state.month = e.target.value; renderAll(); });
+document.querySelectorAll('#hq-division-control .seg-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#hq-division-control .seg-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.division = btn.dataset.div;
+    renderHQ();
+  });
+});
+
+renderAll();
 </script>
+
 </body>
 </html>

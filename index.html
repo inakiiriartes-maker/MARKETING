@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Control de Marketing 2026 — Provalliance</title>
+<title>Control de Marketing — Provalliance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -107,12 +107,12 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .method-pill{
   font-size:10px;font-weight:500;padding:6px 14px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;
 }
-.pill-factura{background:#EEF3FA;color:#2A5BA0}
-.pill-tarjeta{background:#F0EAF8;color:#6B3A90}
+.pill-brand{background:#F5EED8;color:#8B6520}
+.pill-digital{background:#EEF3FA;color:#2A5BA0}
 .pill-otros{background:var(--bg2);color:var(--text2)}
 .pill-hq{background:#EEF3FA;color:#2A5BA0}
 .pill-dist{background:#F5EED8;color:#8B6520}
-.pill-bs{background:#EAF5EE;color:#1A6B3C}
+.pill-tarjeta{background:#F0EAF8;color:#6B3A90}
 
 .foot{
   border-top:1px solid var(--border);padding:32px 28px;text-align:center;
@@ -133,88 +133,87 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
   <div class="topbar-left">
     <div class="topbar-logo">Provalliance</div>
     <div class="topbar-divider"></div>
-    <div class="topbar-title">Marketing · Control 2026</div>
+    <div class="topbar-title">Marketing · Seguimiento vs Contabilidad</div>
   </div>
-  <div class="topbar-right">Ene – Jul 2026</div>
+  <div class="topbar-right">Jul – Ago 2026</div>
 </div>
 
 <div class="hero">
   <div class="hero-eyebrow"><span class="line"></span> Reconciliación de gasto · Marketing &amp; Contabilidad <span class="line"></span></div>
-  <h1>Control de<br><em>Marketing</em> 2026</h1>
-  <p class="sub">Comparativa de gasto real, previsión de Marketing y presupuesto, por unidad de negocio y por proveedor — mes a mes, sin sorpresas.</p>
+  <h1>Control de<br><em>Marketing</em></h1>
+  <p class="sub">Comparativa, proveedor a proveedor, entre lo que reporta Marketing en su seguimiento mensual y lo que queda registrado en Contabilidad — por unidad de negocio y por mes.</p>
   <a class="hero-cta" href="Control_Marketing_2026.html">
     Abrir el dashboard
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
   </a>
   <div class="hero-meta">
-    <div><div class="n">3</div><div class="l">Escenarios</div></div>
+    <div><div class="n">3</div><div class="l">Pestañas</div></div>
     <div class="divider"></div>
-    <div><div class="n">8</div><div class="l">Business Units</div></div>
+    <div><div class="n">2</div><div class="l">Unidades</div></div>
     <div class="divider"></div>
-    <div><div class="n">4</div><div class="l">Vistas</div></div>
+    <div><div class="n">2</div><div class="l">Meses</div></div>
     <div class="divider"></div>
-    <div><div class="n">100%</div><div class="l">Líneas contables</div></div>
+    <div><div class="n">4</div><div class="l">Columnas clave</div></div>
   </div>
 </div>
 
 <div class="content">
 
   <div class="section-label">Qué compara</div>
-  <div class="section-title">Tres escenarios, un mismo lenguaje</div>
-  <p class="section-desc">El dashboard cruza el gasto tal y como queda registrado en el ERP con lo que Marketing reporta en su plantilla mensual, línea a línea y sin exclusiones — para que cualquier pivote que hagas sobre el fichero original cuadre exactamente con lo que ves aquí.</p>
+  <div class="section-title">Seguimiento y Contabilidad, proveedor a proveedor</div>
+  <p class="section-desc">Cada pestaña cruza dos fuentes por proveedor: el <b>Seguimiento</b> que reporta el equipo de Marketing y lo que queda finalmente registrado en <b>Contabilidad</b>. La diferencia entre ambas se calcula automáticamente para detectar descuadres al instante.</p>
 
   <div class="grid-3">
     <div class="grid-card">
       <div class="icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg>
-      </div>
-      <h3>Contabilidad</h3>
-      <p>Todas las líneas del extracto contable: facturas, tarjeta, provisiones, periodificaciones, ajustes, abonos y comisiones.</p>
-    </div>
-    <div class="grid-card">
-      <div class="icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
       </div>
-      <h3>Previsto Marketing</h3>
-      <p>Lo reportado en la plantilla mensual del equipo de Marketing, filtrado a Factura y Tarjeta de Crédito.</p>
+      <h3>Distribución</h3>
+      <p>Comparativa de proveedores de la unidad de Distribución, filtrable por mes (Julio / Agosto).</p>
     </div>
     <div class="grid-card">
       <div class="icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20" stroke-dasharray="3 3"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg>
       </div>
-      <h3>Presupuesto</h3>
-      <p>Pendiente de recibir el fichero — se incorporará como tercer escenario en cuanto esté disponible.</p>
+      <h3>HQ</h3>
+      <p>Comparativa de HQ filtrable por mes y, dentro de HQ, por división: Brand o Digital.</p>
+    </div>
+    <div class="grid-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      </div>
+      <h3>Tarjeta</h3>
+      <p>Desglose línea a línea de los movimientos de la tarjeta de crédito, por mes.</p>
     </div>
   </div>
 
   <div class="section-label">Cómo navegarlo</div>
-  <div class="section-title">Cuatro vistas, un mismo filtro</div>
-  <p class="section-desc">Los filtros de BU y periodo aplican a las cuatro pestañas. Cada tabla permite hacer clic en una fila para ver el detalle mensual de ese proveedor.</p>
+  <div class="section-title">Tres pestañas, filtros por mes y división</div>
+  <p class="section-desc">Un filtro de mes (Julio / Agosto) en la cabecera aplica a las tres pestañas. Dentro de HQ, un segundo filtro permite acotar por Brand o Digital. Cada tabla muestra Proveedor, Seguimiento, Contabilidad y Diferencia, con el total al pie.</p>
 
   <div class="tabs-preview">
-    <div class="tab-chip"><span class="dot"></span>Resumen</div>
-    <div class="tab-chip"><span class="dot"></span>Evolución mensual</div>
-    <div class="tab-chip"><span class="dot"></span>Contabilidad</div>
-    <div class="tab-chip"><span class="dot"></span>Diferencias</div>
+    <div class="tab-chip"><span class="dot"></span>Distribución</div>
+    <div class="tab-chip"><span class="dot"></span>HQ</div>
+    <div class="tab-chip"><span class="dot"></span>Tarjeta</div>
   </div>
 
   <div class="section-label">Clasificación</div>
-  <div class="section-title">Método y unidad de negocio</div>
-  <p class="section-desc">Cada línea se etiqueta por método de pago y por BU, para poder filtrar y cuadrar con precisión.</p>
+  <div class="section-title">Unidad y división</div>
+  <p class="section-desc">Dentro de HQ, cada proveedor se etiqueta por división a partir del seguimiento de Marketing, para poder filtrar y cuadrar con precisión.</p>
 
   <div class="method-row">
-    <span class="method-pill pill-factura">Factura</span>
-    <span class="method-pill pill-tarjeta">Tarjeta</span>
-    <span class="method-pill pill-otros">Otros</span>
+    <span class="method-pill pill-dist">Distribución</span>
     <span class="method-pill pill-hq">HQ</span>
-    <span class="method-pill pill-dist">DIST</span>
-    <span class="method-pill pill-bs">BSTORES</span>
+    <span class="method-pill pill-brand">Brand</span>
+    <span class="method-pill pill-digital">Digital</span>
+    <span class="method-pill pill-tarjeta">Tarjeta</span>
+    <span class="method-pill pill-otros">Otros / Sin clasificar</span>
   </div>
 
 </div>
 
 <div class="foot">
-  <b>Provalliance</b> · Marketing · Control 2026 — Ene&ndash;Jul 2026 · Datos: Contabilidad ERP + Plantilla Marketing
+  <b>Provalliance</b> · Marketing · Control 2026 — Jul&ndash;Ago 2026 · Datos: Seguimiento Marketing + Contabilidad ERP + Extracto Tarjeta
 </div>
 
 </body>
