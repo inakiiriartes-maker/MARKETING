@@ -51,6 +51,10 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .seg-control{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:3px}
 .seg-btn{border:none;background:transparent;font-family:inherit;font-size:10.5px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text2);padding:6px 14px;border-radius:100px;cursor:pointer;white-space:nowrap}
 .seg-btn.active{background:var(--navy);color:#fff}
+.card-header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn-export{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;border:none;border-radius:100px;padding:8px 16px;font-family:inherit;font-size:10.5px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .15s}
+.btn-export:hover{background:#24384d}
+.btn-export svg{width:12px;height:12px;flex-shrink:0}
 
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:12px}
@@ -128,6 +132,10 @@ tbody tr:last-child td{border-bottom:none}
           <div class="card-title">Distribución — Seguimiento vs Contabilidad</div>
           <div class="card-hint" id="dist-hint"></div>
         </div>
+        <button class="btn-export" onclick="exportCSV('distribucion')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+          Exportar CSV
+        </button>
       </div>
       <div id="dist-body"></div>
     </div>
@@ -142,10 +150,16 @@ tbody tr:last-child td{border-bottom:none}
           <div class="card-title">HQ — Seguimiento vs Contabilidad</div>
           <div class="card-hint" id="hq-hint"></div>
         </div>
-        <div class="seg-control" id="hq-division-control">
-          <button class="seg-btn active" data-div="ALL">Todas</button>
-          <button class="seg-btn" data-div="BRAND">Brand</button>
-          <button class="seg-btn" data-div="DIGITAL">Digital</button>
+        <div class="card-header-right">
+          <div class="seg-control" id="hq-division-control">
+            <button class="seg-btn active" data-div="ALL">Todas</button>
+            <button class="seg-btn" data-div="BRAND">Brand</button>
+            <button class="seg-btn" data-div="DIGITAL">Digital</button>
+          </div>
+          <button class="btn-export" onclick="exportCSV('hq')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+            Exportar CSV
+          </button>
         </div>
       </div>
       <div id="hq-body"></div>
@@ -162,6 +176,10 @@ tbody tr:last-child td{border-bottom:none}
           <div class="card-title">Tarjeta — Desglose de movimientos</div>
           <div class="card-hint" id="tar-hint"></div>
         </div>
+        <button class="btn-export" onclick="exportCSV('tarjeta')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+          Exportar CSV
+        </button>
       </div>
       <div id="tar-body"></div>
     </div>
@@ -226,6 +244,59 @@ function comparisonTable(rows, totals, opts){
 
 function emptyState(msg){
   return `<div class="empty-state"><div class="big">Sin datos</div><p>${msg}</p></div>`;
+}
+
+function csvField(v){
+  const s = String(v);
+  return /[";\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s;
+}
+function csvNum(n){
+  return (Math.round((Number(n)||0)*100)/100).toFixed(2).replace('.', ',');
+}
+function downloadCSV(filename, rows){
+  const csv = rows.map(r => r.map(csvField).join(';')).join('\r\n');
+  const blob = new Blob(['﻿' + csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function exportCSV(tab){
+  const month = state.month;
+  const monthLabel = MONTH_LABEL[month].replace(' ', '');
+  if(tab === 'distribucion'){
+    const data = DATA.distribucion[month];
+    if(!data) return;
+    const rows = data.rows.slice().sort((a,b) => Math.abs(b.diferencia) - Math.abs(a.diferencia) || a.provider.localeCompare(b.provider));
+    const out = [['Proveedor','Seguimiento (€)','Contabilidad (€)','Diferencia (€)']];
+    rows.forEach(r => out.push([r.provider, csvNum(r.seguimiento), csvNum(r.contabilidad), csvNum(r.diferencia)]));
+    out.push(['TOTAL', csvNum(data.totals.seguimiento), csvNum(data.totals.contabilidad), csvNum(data.totals.diferencia)]);
+    downloadCSV(`Distribucion_${monthLabel}.csv`, out);
+  } else if(tab === 'hq'){
+    const data = DATA.hq[month];
+    if(!data) return;
+    let rows = data.rows;
+    if(state.division !== 'ALL') rows = rows.filter(r => r.division === state.division);
+    rows = rows.slice().sort((a,b) => Math.abs(b.diferencia) - Math.abs(a.diferencia) || a.provider.localeCompare(b.provider));
+    const totals = rows.reduce((acc,r) => ({
+      seguimiento: acc.seguimiento + r.seguimiento,
+      contabilidad: acc.contabilidad + r.contabilidad,
+      diferencia: acc.diferencia + r.diferencia,
+    }), {seguimiento:0, contabilidad:0, diferencia:0});
+    const out = [['Proveedor','División','Seguimiento (€)','Contabilidad (€)','Diferencia (€)']];
+    rows.forEach(r => out.push([r.provider, DIV_LABEL[r.division]||r.division, csvNum(r.seguimiento), csvNum(r.contabilidad), csvNum(r.diferencia)]));
+    out.push(['TOTAL', '', csvNum(totals.seguimiento), csvNum(totals.contabilidad), csvNum(totals.diferencia)]);
+    const divSuffix = state.division === 'ALL' ? '' : `_${DIV_LABEL[state.division]}`;
+    downloadCSV(`HQ_${monthLabel}${divSuffix}.csv`, out);
+  } else if(tab === 'tarjeta'){
+    const data = DATA.tarjeta[month];
+    if(!data) return;
+    const out = [['Fecha operación','Concepto','Tipo movimiento','Importe (€)','Divisa']];
+    data.rows.forEach(r => out.push([r.fecha, r.concepto, r.tipo, csvNum(r.importe), r.divisa]));
+    out.push(['TOTAL', '', '', csvNum(data.total), '']);
+    downloadCSV(`Tarjeta_${monthLabel}.csv`, out);
+  }
 }
 
 function renderDistribucion(){
