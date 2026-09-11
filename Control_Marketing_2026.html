@@ -217,7 +217,7 @@ function kpiHTML(cards){
 function comparisonTable(rows, totals, opts){
   opts = opts || {};
   const showDiv = !!opts.showDivision;
-  const sorted = rows.slice().sort((a,b) => Math.abs(b.diferencia) - Math.abs(a.diferencia) || a.provider.localeCompare(b.provider));
+  const sorted = rows.slice().sort((a,b) => b.contabilidad - a.contabilidad || a.provider.localeCompare(b.provider));
   let html = `<div class="table-wrap"><table><thead><tr>
     <th>Proveedor</th>${showDiv?'<th>División</th>':''}
     <th class="num">Seguimiento</th><th class="num">Contabilidad</th><th class="num">Diferencia</th>
@@ -268,7 +268,7 @@ function exportCSV(tab){
   if(tab === 'distribucion'){
     const data = DATA.distribucion[month];
     if(!data) return;
-    const rows = data.rows.slice().sort((a,b) => Math.abs(b.diferencia) - Math.abs(a.diferencia) || a.provider.localeCompare(b.provider));
+    const rows = data.rows.slice().sort((a,b) => b.contabilidad - a.contabilidad || a.provider.localeCompare(b.provider));
     const out = [['Proveedor','Seguimiento (€)','Contabilidad (€)','Diferencia (€)']];
     rows.forEach(r => out.push([r.provider, csvNum(r.seguimiento), csvNum(r.contabilidad), csvNum(r.diferencia)]));
     out.push(['TOTAL', csvNum(data.totals.seguimiento), csvNum(data.totals.contabilidad), csvNum(data.totals.diferencia)]);
@@ -278,7 +278,7 @@ function exportCSV(tab){
     if(!data) return;
     let rows = data.rows;
     if(state.division !== 'ALL') rows = rows.filter(r => r.division === state.division);
-    rows = rows.slice().sort((a,b) => Math.abs(b.diferencia) - Math.abs(a.diferencia) || a.provider.localeCompare(b.provider));
+    rows = rows.slice().sort((a,b) => b.contabilidad - a.contabilidad || a.provider.localeCompare(b.provider));
     const totals = rows.reduce((acc,r) => ({
       seguimiento: acc.seguimiento + r.seguimiento,
       contabilidad: acc.contabilidad + r.contabilidad,
@@ -293,7 +293,8 @@ function exportCSV(tab){
     const data = DATA.tarjeta[month];
     if(!data) return;
     const out = [['Fecha operación','Concepto','Tipo movimiento','Importe (€)','Divisa']];
-    data.rows.forEach(r => out.push([r.fecha, r.concepto, r.tipo, csvNum(r.importe), r.divisa]));
+    const sortedRows = data.rows.slice().sort((a,b) => Math.abs(b.importe) - Math.abs(a.importe));
+    sortedRows.forEach(r => out.push([r.fecha, r.concepto, r.tipo, csvNum(r.importe), r.divisa]));
     out.push(['TOTAL', '', '', csvNum(data.total), '']);
     downloadCSV(`Tarjeta_${monthLabel}.csv`, out);
   }
@@ -375,7 +376,8 @@ function renderTarjeta(){
   let html = `<div class="table-wrap"><table><thead><tr>
     <th>Fecha operación</th><th>Concepto</th><th>Tipo movimiento</th><th class="num">Importe</th><th>Divisa</th>
   </tr></thead><tbody>`;
-  for(const r of data.rows){
+  const sortedRows = data.rows.slice().sort((a,b) => Math.abs(b.importe) - Math.abs(a.importe));
+  for(const r of sortedRows){
     html += `<tr>
       <td>${esc(r.fecha)}</td>
       <td>${esc(r.concepto)}</td>
